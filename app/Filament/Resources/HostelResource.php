@@ -74,7 +74,8 @@ class HostelResource extends Resource
                 SpatieMediaLibraryFileUpload::make('default')
                     ->label('Images')
                     ->multiple()
-                    ->enableReordering(),
+                    ->enableReordering()
+                    ->minFiles(5),
             ])
         ;
     }
