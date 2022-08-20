@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c38b2102d2badef750c31705e7112c70",
+    "content-hash": "662ea3241a1708b43874b9fdb61b51af",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -487,6 +487,67 @@
             "time": "2020-10-02T16:03:48+00:00"
         },
         {
+            "name": "davidhsianturi/blade-bootstrap-icons",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidhsianturi/blade-bootstrap-icons.git",
+                "reference": "cb45e8ac37b3a646ba342ab396921dcdb22390a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidhsianturi/blade-bootstrap-icons/zipball/cb45e8ac37b3a646ba342ab396921dcdb22390a8",
+                "reference": "cb45e8ac37b3a646ba342ab396921dcdb22390a8",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.0",
+                "illuminate/support": "^8.0|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Davidhsianturi\\BladeBootstrapIcons\\BladeBootstrapIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Davidhsianturi\\BladeBootstrapIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David H. Sianturi",
+                    "email": "davidhsianturi@gmail.com",
+                    "homepage": "https://davidhsianturi.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package to easily make use of Bootstrap Icons in your Laravel Blade views.",
+            "homepage": "https://github.com/davidhsianturi/blade-bootstrap-icons",
+            "keywords": [
+                "Bootstrap Icons",
+                "blade",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/davidhsianturi/blade-bootstrap-icons/issues",
+                "source": "https://github.com/davidhsianturi/blade-bootstrap-icons/tree/v1.3.0"
+            },
+            "time": "2022-03-02T12:27:03+00:00"
+        },
+        {
             "name": "dflydev/dot-access-data",
             "version": "v3.0.1",
             "source": {
@@ -563,16 +624,16 @@
         },
         {
             "name": "dinhdjj/visit",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dinhdjj/laravel-visit.git",
-                "reference": "c33d714ae727a6eaddd2eccbedfe2ef103d67f46"
+                "reference": "4efa49fa22166918dc61c3dce240d53ec14b9775"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dinhdjj/laravel-visit/zipball/c33d714ae727a6eaddd2eccbedfe2ef103d67f46",
-                "reference": "c33d714ae727a6eaddd2eccbedfe2ef103d67f46",
+                "url": "https://api.github.com/repos/dinhdjj/laravel-visit/zipball/4efa49fa22166918dc61c3dce240d53ec14b9775",
+                "reference": "4efa49fa22166918dc61c3dce240d53ec14b9775",
                 "shasum": ""
             },
             "require": {
@@ -631,9 +692,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dinhdjj/laravel-visit/issues",
-                "source": "https://github.com/dinhdjj/laravel-visit/tree/v1.0.0"
+                "source": "https://github.com/dinhdjj/laravel-visit/tree/v1.1.0"
             },
-            "time": "2022-08-18T07:28:56+00:00"
+            "time": "2022-08-18T14:34:01+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -933,16 +994,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.15.19",
+            "version": "v2.15.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/admin.git",
-                "reference": "b83082d50a3ca4c848acdc4d2e6e6e3a02cde404"
+                "reference": "81886c66c7933c2eee5f9b9d00e7455188ea49f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/admin/zipball/b83082d50a3ca4c848acdc4d2e6e6e3a02cde404",
-                "reference": "b83082d50a3ca4c848acdc4d2e6e6e3a02cde404",
+                "url": "https://api.github.com/repos/filamentphp/admin/zipball/81886c66c7933c2eee5f9b9d00e7455188ea49f5",
+                "reference": "81886c66c7933c2eee5f9b9d00e7455188ea49f5",
                 "shasum": ""
             },
             "require": {
@@ -991,20 +1052,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-16T21:36:39+00:00"
+            "time": "2022-08-19T17:21:19+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.15.19",
+            "version": "v2.15.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "79823f5c0025d68d6ba2fde4a030b4ec760765dc"
+                "reference": "629874470da8526fc9495512895226f83f73555e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/79823f5c0025d68d6ba2fde4a030b4ec760765dc",
-                "reference": "79823f5c0025d68d6ba2fde4a030b4ec760765dc",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/629874470da8526fc9495512895226f83f73555e",
+                "reference": "629874470da8526fc9495512895226f83f73555e",
                 "shasum": ""
             },
             "require": {
@@ -1049,11 +1110,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-16T21:36:32+00:00"
+            "time": "2022-08-19T17:21:17+00:00"
         },
         {
             "name": "filament/notifications",
-            "version": "v2.15.19",
+            "version": "v2.15.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -1102,7 +1163,7 @@
         },
         {
             "name": "filament/spatie-laravel-media-library-plugin",
-            "version": "v2.15.19",
+            "version": "v2.15.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/spatie-laravel-media-library-plugin.git",
@@ -1139,16 +1200,16 @@
         },
         {
             "name": "filament/support",
-            "version": "v2.15.19",
+            "version": "v2.15.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "971cd8c11af089bad473700c94b16de58d0eb743"
+                "reference": "052587bd0c797cf41af3a7c00da303a7ae0748d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/971cd8c11af089bad473700c94b16de58d0eb743",
-                "reference": "971cd8c11af089bad473700c94b16de58d0eb743",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/052587bd0c797cf41af3a7c00da303a7ae0748d1",
+                "reference": "052587bd0c797cf41af3a7c00da303a7ae0748d1",
                 "shasum": ""
             },
             "require": {
@@ -1185,20 +1246,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-16T21:36:34+00:00"
+            "time": "2022-08-19T17:21:16+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v2.15.19",
+            "version": "v2.15.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "d948b5c11dd8a1ffaaedf29e7e73d46eccf01514"
+                "reference": "eb751e286f53875c0d2d8d7854c37c76182e51a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/d948b5c11dd8a1ffaaedf29e7e73d46eccf01514",
-                "reference": "d948b5c11dd8a1ffaaedf29e7e73d46eccf01514",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/eb751e286f53875c0d2d8d7854c37c76182e51a3",
+                "reference": "eb751e286f53875c0d2d8d7854c37c76182e51a3",
                 "shasum": ""
             },
             "require": {
@@ -1240,7 +1301,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-15T07:54:28+00:00"
+            "time": "2022-08-19T17:21:11+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -9737,23 +9798,23 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.15",
+            "version": "9.2.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "2e9da11878c4202f97915c1cb4bb1ca318a63f5f"
+                "reference": "2593003befdcc10db5e213f9f28814f5aa8ac073"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2e9da11878c4202f97915c1cb4bb1ca318a63f5f",
-                "reference": "2e9da11878c4202f97915c1cb4bb1ca318a63f5f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2593003befdcc10db5e213f9f28814f5aa8ac073",
+                "reference": "2593003befdcc10db5e213f9f28814f5aa8ac073",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-xmlwriter": "*",
-                "nikic/php-parser": "^4.13.0",
+                "nikic/php-parser": "^4.14",
                 "php": ">=7.3",
                 "phpunit/php-file-iterator": "^3.0.3",
                 "phpunit/php-text-template": "^2.0.2",
@@ -9802,7 +9863,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.15"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.16"
             },
             "funding": [
                 {
@@ -9810,7 +9871,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-07T09:28:20+00:00"
+            "time": "2022-08-20T05:26:47+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -10055,16 +10116,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.21",
+            "version": "9.5.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0e32b76be457de00e83213528f6bb37e2a38fcb1"
+                "reference": "e329ac6e8744f461518272612a479fde958752fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0e32b76be457de00e83213528f6bb37e2a38fcb1",
-                "reference": "0e32b76be457de00e83213528f6bb37e2a38fcb1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e329ac6e8744f461518272612a479fde958752fe",
+                "reference": "e329ac6e8744f461518272612a479fde958752fe",
                 "shasum": ""
             },
             "require": {
@@ -10141,7 +10202,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.21"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.22"
             },
             "funding": [
                 {
@@ -10153,7 +10214,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-06-19T12:14:25+00:00"
+            "time": "2022-08-20T08:25:46+00:00"
         },
         {
             "name": "psr/cache",
