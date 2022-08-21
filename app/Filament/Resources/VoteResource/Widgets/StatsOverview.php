@@ -18,7 +18,7 @@ class StatsOverview extends BaseWidget
                 ->count(label: 'New votes'),
             Card::model(Vote::class, now()->subMonth(), now())
                 ->cache()
-                ->average('score', displaceValue: fn ($value) => number_format($value, 1).' ✯'),
+                ->average('score', displaceValue: fn ($value) => number_format($value * 5, 1).' ✯'),
         ];
     }
 }
