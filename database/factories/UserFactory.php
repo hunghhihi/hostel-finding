@@ -34,6 +34,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'id_number' => $this->faker->unique()->numberBetween(100000000, 999999999),
             'phone_number' => $this->faker->unique()->numberBetween(10000000000, 99999999999),
+            'created_at' => $this->faker->dateTimeBetween('-2 month', 'now'),
         ];
     }
 

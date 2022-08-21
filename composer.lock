@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b3cfd260458fc1bcbc4076e4c86619b",
+    "content-hash": "c38b2102d2badef750c31705e7112c70",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -704,7 +704,7 @@
         },
         {
             "name": "dinhdjj/visit",
-            "version": "v1.1.0",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dinhdjj/laravel-visit.git",
@@ -712,8 +712,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dinhdjj/laravel-visit/zipball/4efa49fa22166918dc61c3dce240d53ec14b9775",
-                "reference": "4efa49fa22166918dc61c3dce240d53ec14b9775",
+                "url": "https://api.github.com/repos/dinhdjj/laravel-visit/zipball/c33d714ae727a6eaddd2eccbedfe2ef103d67f46",
+                "reference": "c33d714ae727a6eaddd2eccbedfe2ef103d67f46",
                 "shasum": ""
             },
             "require": {
@@ -1381,7 +1381,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2022-08-20T21:09:40+00:00"
+            "time": "2022-08-15T07:54:28+00:00"
         },
         {
             "name": "fruitcake/php-cors",

@@ -21,6 +21,7 @@ class AmenityFactory extends Factory
         return [
             'name' => $this->faker->unique()->word(),
             'description' => $this->faker->optional()->sentence(),
+            'created_at' => $this->faker->dateTimeBetween('-2 month', 'now'),
         ];
     }
 }
