@@ -27,6 +27,7 @@ class CommentFactory extends Factory
             'parent_id' => fn ($attrs) => Arr::random([null, Comment::factory(['hostel_id' => $attrs['hostel_id']])]),
             'owner_id' => User::factory(),
             'hostel_id' => Hostel::factory(),
+            'created_at' => $this->faker->dateTimeBetween('-2 month', 'now'),
         ];
     }
 }

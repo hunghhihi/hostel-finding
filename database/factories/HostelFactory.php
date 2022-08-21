@@ -29,6 +29,7 @@ class HostelFactory extends Factory
             'size' => $this->faker->numberBetween(20, 200),
             'monthly_price' => 100000 * $this->faker->numberBetween(100, 1000),
             'owner_id' => User::factory(),
+            'created_at' => $this->faker->dateTimeBetween('-2 month', 'now'),
         ];
     }
 }

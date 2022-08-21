@@ -25,6 +25,7 @@ class VoteFactory extends Factory
             'description' => $this->faker->optional()->sentence(),
             'owner_id' => User::factory(),
             'hostel_id' => Hostel::factory(),
+            'created_at' => $this->faker->dateTimeBetween('-2 month', 'now'),
         ];
     }
 }
