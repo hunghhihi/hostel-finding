@@ -3,7 +3,7 @@
         <div>
             <div>
                 <h3 class="text-lg font-medium leading-6 text-gray-900">Become a host</h3>
-                <p class="max-w-2xl mt-1 text-sm text-gray-500">Chào mừng {{ Auth::user()->name }} trở lại</p>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">Chào mừng {{ Auth::user()->name }} trở lại</p>
             </div>
 
             <div class="mt-6 space-y-6 sm:mt-5 sm:space-y-5">
@@ -11,8 +11,9 @@
                     <label for="title" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Tiêu đề
                     </label>
                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                        <div class="max-w-lg flex rounded-md shadow-sm">
-                            <input wire:model.defer='title' type="text" name="title" id="title"
+                        <div class="flex max-w-lg rounded-md shadow-sm">
+                            <input wire:model.defer='title' type="text" name="title" id="title" required
+                                max="255"
                                 class="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         </div>
                     </div>
@@ -37,11 +38,16 @@
                         x-on:livewire-upload-error="isUploading = false"
                         x-on:livewire-upload-progress="progress = $event.detail.progress">
                         <!-- File Input -->
-                        <input type="file" wire:model.defer="photos" multiple>
+                        <input type="file" wire:model.defer="photos" multiple accept="image/*" required>
 
                         <!-- Progress Bar -->
                         <div x-show="isUploading">
                             <progress max="100" x-bind:value="progress"></progress>
+                        </div>
+                        <div>
+                            @error('photos')
+                                <div class="text-sm text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -50,8 +56,8 @@
                     <label for="title" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Kích thước
                     </label>
                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                        <div class="max-w-lg flex rounded-md shadow-sm">
-                            <input type="number" wire:model.defer='size' name="size""
+                        <div class="flex max-w-lg rounded-md shadow-sm">
+                            <input required type="number" wire:model.defer='size' name="size" min="1"
                                 class="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         </div>
                     </div>
@@ -60,8 +66,8 @@
                     <label for="title" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Giá
                     </label>
                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                        <div class="max-w-lg flex rounded-md shadow-sm">
-                            <input type="number" wire:model.defer='price' name="price"
+                        <div class="flex max-w-lg rounded-md shadow-sm">
+                            <input required type="number" wire:model.defer='price' name="price" min="1"
                                 class="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         </div>
                     </div>

@@ -7,6 +7,8 @@ namespace App\Http\Livewire;
 use App\Models\Amenity;
 use App\Models\Category;
 use App\Models\Hostel;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -22,8 +24,22 @@ class Hosting extends Component
     public array $categoriesList = [];
     public array $amenitiesList = [];
 
+    protected $rules = [
+        'title' => ['required', 'string', 'max:255'],
+        'description' => ['string'],
+        'photos' => ['required', 'array', 'min:5'],
+        'photos.*' => ['image'],
+        'size' => ['required', 'integer', 'min:1'],
+        'price' => ['required', 'integer', 'min:1'],
+    ];
+    protected $messages = [
+        'photos.min' => 'Trường này cần ít nhất 5 ảnh',
+    ];
+
     public function createHostel(): void
     {
+        $this->validate();
+
         $hostel = Hostel::create([
             'title' => $this->title,
             'description' => $this->description,
@@ -48,6 +64,18 @@ class Hosting extends Component
         $this->monthly_price = 0;
         $this->categoriesList = [];
         $this->amenitiesList = [];
+
+        Notification::make()
+            ->title('Saved successfully')
+            ->success()
+            ->body('Changes to the **post** have been saved.')
+            ->actions([
+                Action::make('view')
+                    ->button()
+                    ->url(route('hostels.show', ['hostel' => $hostel])),
+            ])
+            ->send()
+        ;
     }
 
     public function render()

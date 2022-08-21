@@ -14,9 +14,10 @@ class Comment extends Component
 {
     use WithPagination;
     public Hostel $hostel;
-    public $data;
-    public $comment;
-    public $reply;
+    public mixed $count_comment = null;
+    public mixed $data = null;
+    public ?string $comment = null;
+    public ?string $reply = null;
 
     public function mount(Hostel $hostel): void
     {
@@ -55,6 +56,7 @@ class Comment extends Component
     public function reloadHostel(): void
     {
         $this->hostel = Hostel::find($this->hostel->id);
+        $this->count_comment = $this->hostel->loadCount('comments');
         $comments = ModelsComment::where('hostel_id', $this->hostel->id)->where('parent_id', null)->orderBy('created_at', 'desc')->with('owner', 'parent', 'children')->paginate(6);
         foreach ($comments as $comment) {
             $comment->children->load('owner', 'parent', 'children');
