@@ -23,7 +23,7 @@ class Comment extends Component
         $this->hostel = $hostel;
     }
 
-    public function create_comment(): void
+    public function createComment(): void
     {
         $this->validate([
             'comment' => 'required|string',
@@ -34,10 +34,10 @@ class Comment extends Component
             'hostel_id' => $this->hostel->id,
         ]);
         $this->comment = '';
-        $this->reload_hostel();
+        $this->reloadHostel();
     }
 
-    public function reply_comment($id): void
+    public function replyComment($id): void
     {
         $this->validate([
             'reply' => 'required|string',
@@ -49,10 +49,10 @@ class Comment extends Component
             'hostel_id' => $this->hostel->id,
         ]);
         $this->reply = '';
-        $this->reload_hostel();
+        $this->reloadHostel();
     }
 
-    public function reload_hostel(): void
+    public function reloadHostel(): void
     {
         $this->hostel = Hostel::find($this->hostel->id);
         $comments = ModelsComment::where('hostel_id', $this->hostel->id)->where('parent_id', null)->orderBy('created_at', 'desc')->with('owner', 'parent', 'children')->paginate(6);

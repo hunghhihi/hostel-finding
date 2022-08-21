@@ -44,7 +44,7 @@
                                 class="px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out">
                                 <span>Show More</span>
                             </button>
-                            <div role="dialog" aria-labelledby="modal1_label" aria-modal="true" tabindex="0"
+                            <div x-cloak role="dialog" aria-labelledby="modal1_label" aria-modal="true" tabindex="0"
                                 x-show="open" @click="open = false; $refs.modal1_button.focus()"
                                 @click.away="open = false; $refs.modal1_button.focus()"
                                 class="fixed top-0 left-0 flex h-screen w-full flex-col items-center justify-center overflow-auto">
@@ -114,7 +114,7 @@
                                         class="inline-block items-center justify-center px-3 py-1 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out">
                                     </button>
                                     <div class="fixed inset-0 z-30 flex items-center justify-center overflow-auto bg-black bg-opacity-50"
-                                        x-show="more">
+                                        x-show="more" x-cloak>
                                         <!-- Modal inner -->
                                         <div class="max-w-3xl mx-auto rounded-lg bg-white px-6 py-4 text-left shadow-lg"
                                             @click.away="more = false"

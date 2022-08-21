@@ -22,4 +22,9 @@ class HostelController extends Controller
             'hostel' => $hostel,
         ]);
     }
+
+    public function hosting()
+    {
+        return view('hostels.hosting');
+    }
 }

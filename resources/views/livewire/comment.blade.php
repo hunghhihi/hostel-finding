@@ -20,8 +20,7 @@
                         <div class="col-span-1">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <img class="h-10 w-10 rounded-full" src="{{ asset('images/AvatarDefault.png') }}"
-                                        alt="">
+                                    <x-avatar :search="$comment->owner->email" :src="$comment->owner->profile_photo_url" />
                                 </div>
                                 <div class="ml-4">
                                     <div class="text-sm font-medium leading-5 text-gray-900">
@@ -33,7 +32,7 @@
                                 </div>
                             </div>
                             <div x-data="{ reply: false }" class="my-4 ml-4 pl-9 text-base leading-6 text-gray-900">
-                                <div>
+                                <div class="w-96">
                                     {{ $comment->content }}
                                 </div>
                                 <button @click="reply = !reply" class="text-sm leading-5 text-gray-500">
@@ -41,7 +40,7 @@
                                 </button>
                                 <div x-show="reply">
                                     <div class="mt-1">
-                                        <form wire:submit.prevent="reply_comment({{ $comment->id }})" class="flex">
+                                        <form wire:submit.prevent="replyComment({{ $comment->id }})" class="flex">
                                             @csrf
                                             <input type="text" name="reply" id="reply"
                                                 wire:model.defer="reply"
@@ -64,7 +63,7 @@
                                             <div class="text-sm leading-5 text-gray-500">
                                                 {{ $child->created_at->diffForHumans() }}
                                             </div>
-                                            <div class="pl-5">
+                                            <div class="overflow-hidden pl-5">
                                                 {{ $child->content }}
                                             </div>
                                         </div>
@@ -80,10 +79,10 @@
             </div>
         @endif
         <div class="mt-1">
-            <form wire:submit.prevent="create_comment" class="flex">
+            <form wire:submit.prevent="createComment" class="flex">
                 @csrf
                 <input type="text" name="comment" id="comment" wire:model.defer="comment"
-                    class="block w-full rounded-full border-gray-300 px-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    class="block w-1/2 rounded-xl border-gray-300 px-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     placeholder="Write a comment...">
                 <button type="submit"
                     class="focus:shadow-outline-indigo active:shadow-outline-indigo flex-shrink-0 rounded-full border-indigo-500 bg-indigo-500 px-4 py-2 text-sm font-medium leading-5 text-white hover:border-indigo-400 hover:bg-indigo-400 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 active:border-indigo-700 active:bg-indigo-600">

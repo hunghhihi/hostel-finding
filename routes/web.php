@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', fn () => view('welcome'));
-Route::get('/hostels/{hostel:id}', [HostelController::class, 'show'])->name('hostels.show')->middleware('auth');
+Route::get('/hostels/{hostel:id}', [HostelController::class, 'show'])->name('hostels.show');
+Route::get('/hosting', [HostelController::class, 'hosting'])->name('hosting')->middleware('auth');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
