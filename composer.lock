@@ -563,16 +563,16 @@
         },
         {
             "name": "dinhdjj/filament-model-widgets",
-            "version": "v0.0.2",
+            "version": "v0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dinhdjj/filament-model-widgets.git",
-                "reference": "e0dd93c8d6bafa7bb9d10f8a91f7d27d7dbf33e9"
+                "reference": "f6b29f498372605b2623a4cbc0c35587f2b6b8a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dinhdjj/filament-model-widgets/zipball/e0dd93c8d6bafa7bb9d10f8a91f7d27d7dbf33e9",
-                "reference": "e0dd93c8d6bafa7bb9d10f8a91f7d27d7dbf33e9",
+                "url": "https://api.github.com/repos/dinhdjj/filament-model-widgets/zipball/f6b29f498372605b2623a4cbc0c35587f2b6b8a3",
+                "reference": "f6b29f498372605b2623a4cbc0c35587f2b6b8a3",
                 "shasum": ""
             },
             "require": {
@@ -630,9 +630,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dinhdjj/filament-model-widgets/issues",
-                "source": "https://github.com/dinhdjj/filament-model-widgets/tree/v0.0.2"
+                "source": "https://github.com/dinhdjj/filament-model-widgets/tree/v0.0.4"
             },
-            "time": "2022-08-21T09:41:18+00:00"
+            "time": "2022-08-21T13:34:46+00:00"
         },
         {
             "name": "dinhdjj/visit",
