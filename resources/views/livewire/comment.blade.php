@@ -7,12 +7,21 @@
         {{ round($hostel->votes_avg_score * 5, 2) }}
         <x-heroicon-s-star class="inline-block h-4" />
         <x-bi-dot />
-        {{ $hostel->votes_count }} reviews
+        <div class="my-4 inline-block text-base leading-6 text-gray-900">
+            {{ $hostel->votes_count }} đánh giá
+        </div>
         <x-bi-dot />
         {{ $hostel->comments_count }} comments
     </div>
+    @can('create', [\App\Comment::class, $hostel])
+    @else
+        <div class="text-sm font-semibold text-red-500">
+            You have voted this hostel {{ $hostel->votes->where('owner_id', auth()->id())->first()->score }} stars
+        </div>
+    @endcan
+
     {{-- comment --}}
-    @if (Auth::check())
+    @auth
         @if ($comments->count() > 0)
             <div class="grid grid-cols-2">
                 @foreach ($comments as $index => $comment)
@@ -42,8 +51,7 @@
                                     <div class="mt-1">
                                         <form wire:submit.prevent="replyComment({{ $comment->id }})" class="flex">
                                             @csrf
-                                            <input type="text" name="reply" id="reply"
-                                                wire:model.defer="reply"
+                                            <input type="text" name="reply" id="reply" wire:model.defer="reply"
                                                 class="block w-full rounded-full border-gray-300 px-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 placeholder="Write a reply...">
                                             <button type="submit"
@@ -89,13 +97,13 @@
                     Post comment</button>
             </form>
         </div>
-</div>
-@else
-<div class="text-center">
-    <a href="{{ route('login') }}" class="text-indigo-500 hover:text-indigo-700">
-        Đăng nhập để bình luận
-    </a>
-</div>
-@endif
-{{-- end comment --}}
+        </>
+    @else
+        <div class="text-center">
+            <a href="{{ route('login') }}" class="text-indigo-500 hover:text-indigo-700">
+                Đăng nhập để bình luận
+            </a>
+        </div>
+    @endauth
+    {{-- end comment --}}
 </div>

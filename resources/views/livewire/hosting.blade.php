@@ -1,8 +1,8 @@
-<form wire:submit.prevent="createHostel" class="space-y-8 divide-y divide-gray-200 px-20">
+<form wire:submit.prevent="createHostel" class="space-y-8 divide-y divide-gray-200 py-6 px-20">
     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
             <div>
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Become a host</h3>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Đăng nhà trọ</h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">Chào mừng {{ Auth::user()->name }} trở lại</p>
             </div>
 
@@ -24,33 +24,37 @@
                     <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Mô tả
                     </label>
                     <div wire:model.defer='description' class="mt-1 sm:col-span-2 sm:mt-0">
-                        {{-- not receive description TODO --}}
                         <x-easy-mde name="about">
                         </x-easy-mde>
                     </div>
                 </div>
-
-                <div class="min sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                    <label for="cover-photo" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Ảnh
-                    </label>
-                    <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
-                        x-on:livewire-upload-finish="isUploading = false"
-                        x-on:livewire-upload-error="isUploading = false"
-                        x-on:livewire-upload-progress="progress = $event.detail.progress">
-                        <!-- File Input -->
-                        <input type="file" wire:model.defer="photos" multiple accept="image/*" required>
-
-                        <!-- Progress Bar -->
-                        <div x-show="isUploading">
-                            <progress max="100" x-bind:value="progress"></progress>
-                        </div>
+                <div x-data="dropdown"
+                    class="m:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div class="my-5 text-2xl font-bold">
+                        Phòng trọ của bạn ở đâu
+                    </div>
+                    <div class="gap-10 sm:flex">
+                        <button type="button" x-ref="button"
+                            class="mb-5 rounded border-b-4 border-blue-700 bg-blue-500 py-2 px-4 font-bold text-white hover:border-blue-500 hover:bg-blue-400">Địa
+                            chỉ hiện tại</button>
                         <div>
-                            @error('photos')
-                                <div class="text-sm text-red-500">{{ $message }}</div>
-                            @enderror
+                            <input type="text" x-ref="address" @keydown.enter.prevent=""
+                                class="mb-5 w-96 rounded-md border border-gray-300 px-4 py-2" placeholder="Tìm kiếm">
                         </div>
                     </div>
-
+                    <div x-ref="map" wire:ignore class="h-96 w-full"></div>
+                    <div class="flex">
+                        <span
+                            class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400">
+                            Địa chỉ
+                        </span>
+                        <input type="text" wire:model="address" disabled
+                            class="block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            placeholder="...">
+                    </div>
+                </div>
+                <div class="sm:border-t sm:border-gray-200">
+                    {{ $this->form }}
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                     <label for="title" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Kích thước
@@ -139,6 +143,7 @@
             </div>
         </div>
     </div>
+
     <div class="pt-5">
         <div class="flex justify-end">
             <button type="button"
@@ -148,3 +153,180 @@
         </div>
     </div>
 </form>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('dropdown', () => ({
+            google: null,
+            map: null,
+            address: null,
+            center: {
+                lat: 10.77,
+                lng: 106.69
+            },
+            async init() {
+                this.google = await window.useGoogleMaps();
+                this.map = new this.google.maps.Map(this.$refs.map, {
+                    center: this.center,
+                    zoom: 14,
+                    maxZoom: 19,
+                    minZoom: 7,
+                });
+                marker = new this.google.maps.Marker({
+                    position: this.center,
+                    map: this.map,
+                    draggable: true,
+                    animation: this.google.maps.Animation.DROP,
+                });
+                const defaultBounds = {
+                    north: this.center.lat + 0.1,
+                    south: this.center.lat - 0.1,
+                    east: this.center.lng + 0.1,
+                    west: this.center.lng - 0.1,
+                };
+                const input = this.$refs.address;
+                const options = {
+                    bounds: defaultBounds,
+                    componentRestrictions: {
+                        country: "vn"
+                    },
+                    fields: ["address_components", "geometry", "icon", "name"],
+                    strictBounds: false,
+                };
+                // search Box
+                const searchBox = new google.maps.places.SearchBox(input);
+                searchBox.addListener('places_changed', () => {
+                    const places = searchBox.getPlaces();
+                    if (places.length == 0) {
+                        return;
+                    }
+                    const bounds = new this.google.maps.LatLngBounds();
+                    places.forEach(place => {
+                        if (!place.geometry) {
+                            console.log("Returned place contains no geometry");
+                            return;
+                        }
+                        if (place.geometry.viewport) {
+                            bounds.union(place.geometry.viewport);
+                        } else {
+                            bounds.extend(place.geometry.location);
+                        }
+                    });
+                    this.map.fitBounds(bounds);
+                    this.center = bounds.getCenter();
+                    marker.setPosition(this.center);
+                    const geocoder = new this.google.maps.Geocoder();
+                    geocoder.geocode({
+                        location: this.center
+                    }, (results, status) => {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                this.address = results[0].formatted_address;
+                                this.$wire.address = this.address;
+                                this.$wire.setLatLng(this.center.toJSON());
+                            } else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+
+                });
+                //auto complete
+                const autocomplete = new google.maps.places.Autocomplete(input, options);
+                autocomplete.addListener("place_changed", () => {
+                    const places = autocomplete.getPlace();
+                    if (places.geometry) {
+                        this.center = {
+                            lat: places.geometry.location.lat(),
+                            lng: places.geometry.location.lng(),
+                        };
+                        this.map.setCenter(this.center);
+                    }
+                    marker.setPosition(this.center);
+                    const geocoder = new this.google.maps.Geocoder();
+                    geocoder.geocode({
+                        location: this.center
+                    }, (results, status) => {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                this.address = results[0].formatted_address;
+                                this.$wire.address = this.address;
+                                this.$wire.setLatLng(this.center.toJSON());
+                            } else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+
+                });
+                //get current location
+                this.$refs.button.addEventListener('click', () => {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        this.center = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        this.map.setCenter(this.center);
+                        const geocoder = new this.google.maps.Geocoder();
+                        geocoder.geocode({
+                            location: this.center
+                        }, (results, status) => {
+                            if (status === 'OK') {
+                                if (results[0]) {
+                                    this.address = results[0]
+                                        .formatted_address;
+                                    this.$wire.address = this.address;
+                                    this.$wire.setLatLng(this.center
+                                        .toJSON());
+                                } else {
+                                    window.alert('No results found');
+                                }
+                            } else {
+                                window.alert(
+                                    'Geocoder failed due to: ' +
+                                    status);
+                            }
+                        });
+                        marker.setMap(null);
+                        marker = new this.google.maps.Marker({
+                            position: this.center,
+                            map: this.map,
+                            draggable: true,
+                            animation: this.google.maps.Animation.DROP,
+                        });
+                    });
+
+                });
+
+                this.map.addListener('center_changed', () => {
+                    this.center = this.map.getCenter();
+                    marker.setPosition(this.center);
+
+                });
+                // drag end
+                this.map.addListener('dragend', () => {
+                    const geocoder = new this.google.maps.Geocoder();
+                    geocoder.geocode({
+                        location: this.center
+                    }, (results, status) => {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                this.address = results[0].formatted_address;
+                                this.$wire.address = this.address;
+                                this.$wire.setLatLng(this.center.toJSON());
+                            } else {
+                                window.alert('No results found');
+                            }
+                        } else {
+                            window.alert('Geocoder failed due to: ' + status);
+                        }
+                    });
+                });
+            }
+        }))
+    })
+</script>
