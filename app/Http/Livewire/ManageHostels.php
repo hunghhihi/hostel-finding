@@ -112,19 +112,19 @@ class ManageHostels extends Component implements HasTable
 
     protected function getTableEmptyStateHeading(): ?string
     {
-        return 'Bạn chưa có bài đăng nào';
+        return 'Bạn chưa có nhà trọ nào';
     }
 
     protected function getTableEmptyStateDescription(): ?string
     {
-        return 'Bạn có thể tạo bài đăng mới bằng cách nhấn vào nút bên dưới';
+        return 'Bạn có thể tạo nhà trọ mới bằng cách nhấn vào nút bên dưới';
     }
 
     protected function getTableEmptyStateActions(): array
     {
         return [
             Action::make('create')
-                ->label('Tạo mới bài đăng')
+                ->label('Tạo mới nhà trọ')
                 ->url(route('hostels.create'))
                 ->icon('heroicon-o-plus')
                 ->button(),
