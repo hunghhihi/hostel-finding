@@ -24,6 +24,7 @@ class UserHostelVisits extends Component
 
     public function updateStat(): void
     {
+        $this->visitCount = 0;
         $hostels = Hostel::where('owner_id', $this->user->id)->get();
         foreach ($hostels as $hostel) {
             $this->visitCount += $hostel->visitLogs()->where('created_at', '>=', now()->subDays($this->selectedDays))->count();
