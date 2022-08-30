@@ -66,6 +66,8 @@
                         tabindex="-1" id="user-menu-item-0">Hồ sơ</a>
                     <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
                         tabindex="-1" id="user-menu-item-0">Bảng điều khiển</a>
+                    <a href="{{ route('hostels.manage') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                        tabindex="-1" id="user-menu-item-0">Quản lý nhà trọ</a>
                     <form x-data method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="block px-4 py-2 text-sm text-gray-700" href="{{ route('logout') }}"

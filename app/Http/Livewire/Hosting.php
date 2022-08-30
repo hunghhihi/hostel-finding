@@ -78,7 +78,7 @@ class Hosting extends Component implements HasForms
         Notification::make()
             ->title('Saved successfully')
             ->success()
-            ->body('Create to the **post** have been saved.')
+            ->body('Bạn đã tạo thành công căn hộ mới')
             ->actions([
                 Action::make('view')
                     ->button()
@@ -86,6 +86,11 @@ class Hosting extends Component implements HasForms
             ])
             ->send()
         ;
+    }
+
+    public function backToHome(): mixed
+    {
+        return redirect()->route('hostels.index');
     }
 
     public function render(): View
@@ -103,6 +108,7 @@ class Hosting extends Component implements HasForms
     {
         return [
             Placeholder::make('Images')
+                ->label('Ảnh')
                 ->content('Ảnh cuối cùng sẽ là ảnh đại diện cho nhà của bạn hãy sắp xếp theo thứ tự thật chính xác!'),
             SpatieMediaLibraryFileUpload::make('media')
                 ->label('')

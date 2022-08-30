@@ -36,6 +36,7 @@
     </div>
 
     @livewireScripts
+    @livewire('notifications')
 </body>
 
 </html>
