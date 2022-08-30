@@ -26,12 +26,12 @@ class UserHostelVotes extends Component
     public function updateStat(): void
     {
         // vote count of hostel in last 30 days
-        $this->voteCount = Vote::whereIn('hostel_id', $this->user->hostels->pluck('id'))
+        $this->voteCount = (int) Vote::whereIn('hostel_id', $this->user->hostels->pluck('id'))
             ->where('created_at', '>=', now()->subDays($this->selectedDays))
             ->count()
         ;
         // vote score of hostel in last 30 days
-        $this->voteScoreAvg = Vote::whereIn('hostel_id', $this->user->hostels->pluck('id'))
+        $this->voteScoreAvg = (float) Vote::whereIn('hostel_id', $this->user->hostels->pluck('id'))
             ->where('created_at', '>=', now()->subDays($this->selectedDays))
             ->average('score')
         ;
