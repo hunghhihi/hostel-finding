@@ -15,7 +15,6 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -30,7 +29,10 @@ class ManageHostels extends Component implements HasTable
 
     protected function getTableQuery(): Builder
     {
-        return Hostel::where('owner_id', auth()->id());
+        $hostel = Hostel::where('owner_id', auth()->id());
+        $hostel->withAvg('votes', 'score');
+
+        return $hostel;
     }
 
     protected function getTableColumns(): array
@@ -48,7 +50,7 @@ class ManageHostels extends Component implements HasTable
             TextColumn::make('score')
                 ->label('Điểm')
                 ->avg('votes', 'score')
-                ->getStateUsing(fn (Hostel $record) => $record->votes_score * 5 .' ✯'), // @phpstan-ignore-line
+                ->getStateUsing(fn (Hostel $record) => $record->votes_avg_score * 5 .' ✯'), // @phpstan-ignore-line
             TextColumn::make('size')
                 ->label('Kích thước')
                 ->getStateUsing(fn (Hostel $record) => $record->size.' m²')
@@ -100,7 +102,7 @@ class ManageHostels extends Component implements HasTable
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('hostels.show', ['hostel' => $record]);
+        return fn (Hostel $record): string => route('hostels.show', ['hostel' => $record]);
     }
 
     protected function getTableEmptyStateIcon(): ?string

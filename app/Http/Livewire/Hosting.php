@@ -31,7 +31,7 @@ class Hosting extends Component implements HasForms
     public float $longitude = 0;
     public array $categoriesList = [];
     public array $amenitiesList = [];
-    public mixed $media;
+    public mixed $media = null;
 
     protected array $rules = [
         'title' => ['required', 'string', 'max:255'],
@@ -67,7 +67,7 @@ class Hosting extends Component implements HasForms
         foreach ($this->media as $photo) {
             $hostel->addMedia($photo)->toMediaCollection();
         }
-        $this->media = [];
+        $this->media = null;
         $this->title = '';
         $this->description = '';
         $this->size = 0;
@@ -109,7 +109,7 @@ class Hosting extends Component implements HasForms
         return [
             Placeholder::make('Images')
                 ->label('Ảnh')
-                ->content('Ảnh cuối cùng sẽ là ảnh đại diện cho nhà của bạn hãy sắp xếp theo thứ tự thật chính xác!'),
+                ->content('Ảnh đầu tiên sẽ là ảnh đại diện cho nhà của bạn hãy sắp xếp theo thứ tự thật chính xác!'),
             SpatieMediaLibraryFileUpload::make('media')
                 ->label('')
                 ->multiple()
