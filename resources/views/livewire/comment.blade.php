@@ -37,21 +37,21 @@
                         let i = this.ratings.findIndex(e => e.amount == r);
                         if (i >= 0) { return this.ratings[i].amount; } else { return '' };
                     }
-                }" class="flex h-36 w-72 flex-col items-center space-y-2 rounded">
-                    <div class="flex space-x-0 bg-gray-100">
+                }" class="flex h-36 w-72 flex-col items-start space-y-2 rounded">
+                    <div class="flex space-x-0">
                         <template x-for="(star, index) in ratings" :key="index">
                             <button @click="rate(star.amount)" @mouseover="hoverRating = star.amount"
                                 @mouseleave="hoverRating = rating" aria-hidden="true" :title="star.label"
-                                class="focus:shadow-outline m-0 w-12 cursor-pointer rounded-sm fill-current p-1 text-gray-400 focus:outline-none"
+                                class="focus:shadow-outline m-0 w-10 cursor-pointer rounded-sm fill-current p-1 text-gray-400 focus:outline-none"
                                 :class="{
-                                    'text-gray-600': hoverRating >= star.amount,
+                                    'text-green-600': hoverRating >= star.amount,
                                     'text-yellow-400': rating >= star
                                         .amount && hoverRating >= star.amount
                                 }">
                                 <svg class="w-15 transition duration-150" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        d="M9.5 14.25l-5.584 2.936 1.066-6.218L.465 6.564l6.243-.907L9.5 0l2.792 5.657 6.243.907-4.517 4.404 1.066 6.218" />
                                 </svg>
                             </button>
 
@@ -64,9 +64,11 @@
                         <template x-if="!rating && !hoverRating">
                             <p>Please Rate!</p>
                         </template>
+                    </div>
+                    <div>
                         <template x-if="rating">
                             <button x-on:click="$wire.createVote(currentRate())"
-                                class="focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                                class="focus:shadow-outline rounded bg-blue-500 py-1 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none">
                                 Gửi đánh giá
                             </button>
                         </template>
@@ -75,8 +77,7 @@
             </div>
         @else
             <div class="pb-5 text-sm font-semibold text-success-500">
-                Bạn đã đánh giá bài viết này với {{ $hostel->votes->where('owner_id', auth()->id())->first()->score * 5 }}
-                <x-heroicon-s-star class="inline-block h-5" />
+                Bạn đã đánh giá bài viết này với {{ $hostel->votes->where('owner_id', auth()->id())->first()->score * 5 }} sao
             </div>
         @endcan
 
@@ -146,6 +147,10 @@
             </div>
             <div>
                 {{ $comments->links() }}
+            </div>
+        @else
+            <div class="text-center text-gray-500">
+                Chưa có bình luận nào
             </div>
         @endif
         <div class="mt-1">

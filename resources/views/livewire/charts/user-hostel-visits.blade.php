@@ -31,7 +31,7 @@
                         data: {
                             labels: this.labels,
                             datasets: [{
-                                label: 'Số lượng',
+                                label: 'Số lượng lượt xem',
                                 data: this.data,
                                 borderColor: 'rgba(75, 134, 255, 1)',
                             }],
