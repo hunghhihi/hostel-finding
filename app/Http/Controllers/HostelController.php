@@ -13,7 +13,7 @@ class HostelController extends Controller
     public function show(Hostel $hostel): View
     {
         $hostel->loadAggregate('votes', 'score', 'avg')->loadCount('votes', 'comments');
-        $builder = $hostel->visitLog(Auth::user());
+        $builder = $hostel->visitLog(Auth::user()); // @phpstan-ignore-line
         $builder->byIp();
         $builder->byVisitor();
         $builder->interval(60 * 15);

@@ -115,7 +115,8 @@
                                                 placeholder="Write a reply...">
                                             <button type="submit"
                                                 class="focus:shadow-outline-indigo active:shadow-outline-indigo flex-shrink-0 rounded-full border-indigo-500 bg-indigo-500 px-4 py-2 text-sm font-medium leading-5 text-white hover:border-indigo-400 hover:bg-indigo-400 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 active:border-indigo-700 active:bg-indigo-600">
-                                                <x-uiw-loading wire:loading class="h-5 w-5 animate-spin" />
+                                                <x-uiw-loading wire:loading class="h-5 w-5 animate-spin"
+                                                    wire:target="replyComment({{ $comment->id }})" />
                                                 Gửi phản hồi
                                             </button>
                                         </form>
@@ -155,7 +156,7 @@
                     placeholder="Write a comment...">
                 <button type="submit"
                     class="focus:shadow-outline-indigo active:shadow-outline-indigo flex-shrink-0 rounded-full border-indigo-500 bg-indigo-500 px-4 py-2 text-sm font-medium leading-5 text-white hover:border-indigo-400 hover:bg-indigo-400 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 active:border-indigo-700 active:bg-indigo-600">
-                    <x-uiw-loading wire:loading class="h-5 w-5 animate-spin" />
+                    <x-uiw-loading wire:loading class="h-5 w-5 animate-spin" wire:target="createComment" />
                     Gửi bình luận
                 </button>
             </form>

@@ -7,14 +7,15 @@ namespace App\Http\Livewire\Charts;
 use App\Models\Hostel;
 use App\Models\User;
 use App\Models\Visit;
-use Auth;
 use Flowframe\Trend\Trend;
 use Illuminate\Support\Carbon;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class UserHostelVisits extends Component
 {
     public int $selectedDays = 30;
+    public User $user;
     public array $labels;
     public array $data;
 
@@ -23,12 +24,12 @@ class UserHostelVisits extends Component
         $this->user = $user;
     }
 
-    public function render()
+    public function render(): View
     {
-        $hostels = Hostel::where('owner_id', Auth::user()->id)->get();
+        $hostels = Hostel::where('owner_id', $this->user->id)->get();
         $trend = Trend::query(
-            Visit::whereIn('visitable_id', $hostels->pluck('id'))
-                ->where('visitable_type', (new Hostel())->getMorphClass())
+            Visit::whereIn('visitable_id', $hostels->pluck('id'))  // @phpstan-ignore-line
+                ->where('visitable_type', (new Hostel())->getMorphClass())  // @phpstan-ignore-line
         )
             ->between(now()->subDays($this->selectedDays), now())
             ->perDay()
