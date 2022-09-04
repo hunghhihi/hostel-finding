@@ -46,6 +46,9 @@
             <div x-ref="map" class="h-96 w-full"></div>
         </div>
     </div>
+
+    <x-footer.simple class="mt-12" />
+
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('dropdown', () => ({
