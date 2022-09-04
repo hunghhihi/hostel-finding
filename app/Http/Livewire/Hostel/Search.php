@@ -89,6 +89,7 @@ class Search extends Component
     public function render(): View
     {
         $hostels = $this->getBaseHostelQuery()
+            ->withCount('visitLogs')
             ->where('latitude', '>=', $this->south)
             ->where('latitude', '<=', $this->north)
             ->where('longitude', '>=', $this->west)
