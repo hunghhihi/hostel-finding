@@ -1,73 +1,81 @@
 <x-guest-layout>
-    <x-container>
-        <div class="container mx-auto px-4">
-            {{-- Title --}}
-            <div class="flex-col items-center border-b-2 border-slate-500">
-                <div>
-                    <h1 class="text-9xl font-bold">{{ $hostel->title }}</h1>
-                </div>
-                <div class="flex items-center pb-5">
-                    <div class="flex items-center font-bold">
-                        {{ round($hostel->votes_avg_score * 5, 2) }}
-                        <x-heroicon-s-star class="inline-block h-4" />
-                        <x-bi-dot />
-                        {{ $hostel->votes_count }} đánh giá
-                        <x-bi-dot />
-                        {{ $hostel->visitLogs()->count() }} lượt xem
-                    </div>
+    <x-slot name="head">
+        <title>{{ $hostel->title }}</title>
 
-                    <div class="pl-9">
-                        <div class="text-sm leading-5 text-gray-500">
-                            <a href="#">{{ $hostel->address }}</a>
-                        </div>
-                    </div>
-                </div>
+        <x-social-meta :title="$hostel->title" :description="$hostel->address" :image="$hostel->getFirstMediaUrl()" />
+    </x-slot>
+
+    <x-header.search class="mb-4 border-b" />
+
+    <div class="container mx-auto px-4">
+        {{-- Title --}}
+        <div class="flex-col items-center border-b-2 border-slate-500">
+            <div>
+                <h1 class="text-9xl font-bold">{{ $hostel->title }}</h1>
             </div>
-            {{-- media --}}
-            <x-hostel.image-section :hostel="$hostel" class="my-6" />
-            {{-- info --}}
-            <x-hostel.info-section :hostel="$hostel" class="my-6" />
-
-            {{-- comments --}}
-            <div class="border-t-2 border-b-2 border-slate-500 pb-20">
-                <livewire:comment :hostel="$hostel" />
-            </div>
-
-            {{-- map --}}
-            <div x-data="dropdown" class="my-10 px-20">
-                <div class="my-5 text-2xl font-bold">
-                    Nơi bạn sẽ đến
+            <div class="flex items-center pb-5">
+                <div class="flex items-center font-bold">
+                    {{ round($hostel->votes_avg_score * 5, 2) }}
+                    <x-heroicon-s-star class="inline-block h-4" />
+                    <x-bi-dot />
+                    {{ $hostel->votes_count }} reviews
                 </div>
-                <div x-ref="map" class="h-96 w-full"></div>
+
+                <div class="pl-9">
+                    <div class="text-sm leading-5 text-gray-500">
+                        <a href="#">{{ $hostel->address }}</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.data('dropdown', () => ({
-                    google: null,
-                    map: null,
-                    latitude: @json($hostel->latitude),
-                    longitude: @json($hostel->longitude),
-                    title: @json($hostel->title),
-                    async init() {
-                        this.google = await window.useGoogleMaps();
+        {{-- media --}}
+        <x-hostel.image-section :hostel="$hostel" class="my-6" />
+        {{-- info --}}
+        <x-hostel.info-section :hostel="$hostel" class="my-6" />
 
-                        this.map = new this.google.maps.Map(this.$refs.map, {
-                            center: {
-                                lat: this.latitude,
-                                lng: this.longitude
-                            },
-                            zoom: 14,
-                            maxZoom: 19,
-                            minZoom: 7,
-                        });
-                        const marker = window.createHtmlMapMarker(this.google, {
-                            position: new google.maps.LatLng(
-                                this.latitude,
-                                this.longitude
-                            ),
-                            map: this.map,
-                            html: /*html*/ `
+        {{-- comments --}}
+        <div class="border-t-2 border-b-2 border-slate-500 pb-20">
+            <livewire:comment :hostel="$hostel" />
+        </div>
+
+        {{-- map --}}
+        <div x-data="dropdown" class="my-10 px-20">
+            <div class="my-5 text-2xl font-bold">
+                Nơi bạn sẽ đến
+            </div>
+            <div x-ref="map" class="h-96 w-full"></div>
+        </div>
+    </div>
+
+    <x-footer.simple class="mt-12" />
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dropdown', () => ({
+                google: null,
+                map: null,
+                latitude: @json($hostel->latitude),
+                longitude: @json($hostel->longitude),
+                title: @json($hostel->title),
+                async init() {
+                    this.google = await window.useGoogleMaps();
+
+                    this.map = new this.google.maps.Map(this.$refs.map, {
+                        center: {
+                            lat: this.latitude,
+                            lng: this.longitude
+                        },
+                        zoom: 14,
+                        maxZoom: 19,
+                        minZoom: 7,
+                    });
+                    const marker = window.createHtmlMapMarker(this.google, {
+                        position: new google.maps.LatLng(
+                            this.latitude,
+                            this.longitude
+                        ),
+                        map: this.map,
+                        html: /*html*/ `
                         <div class="p-2 rounded-full bg-red-200">
                             <div class="p-3 rounded-full bg-red-500 flex items-center justify-center">
                                 <svg class="text-white"  viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 22px; width: 22px; fill: currentcolor;">
@@ -76,22 +84,22 @@
                             </div>
                         </div>
                 `,
-                        });
+                    });
 
-                    }
-                }))
-            })
+                }
+            }))
+        })
 
-            // document.addEventListener('alpine:init', () => {
-            //     Alpine.data('dropdown', () => ({
-            //         open: false,
+        // document.addEventListener('alpine:init', () => {
+        //     Alpine.data('dropdown', () => ({
+        //         open: false,
 
-            //         toggle() {
-            //             this.open = !this.open
-            //         },
-            //     }))
-            // })
-        </script>
+        //         toggle() {
+        //             this.open = !this.open
+        //         },
+        //     }))
+        // })
+    </script>
     </x-container>
 
 </x-guest-layout>

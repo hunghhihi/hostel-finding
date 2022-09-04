@@ -27,6 +27,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "@alpinejs/mask": "^3.10.3",
         "chart.js": "^3.9.1",
         "google-maps": "^4.3.3",
         "tippy.js": "^6.3.7"

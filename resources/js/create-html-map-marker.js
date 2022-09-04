@@ -14,6 +14,7 @@ export function createHtmlMapMarker(google, option) {
             const div = document.createElement('div');
             div.style.position = 'absolute';
             div.innerHTML = html;
+            div.firstElementChild.style.transform = 'translate(-50%, -50%)';
 
             div.addEventListener('click', (e) => {
                 google.maps.event.trigger(this, 'click', e);
