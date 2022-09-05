@@ -1,54 +1,66 @@
 <x-guest-layout>
-    <x-slot name="head">
-        <title>{{ $hostel->title }}</title>
+    <div class="container mx-auto px-32">
+        <x-slot name="head">
+            <title>{{ $hostel->title }}</title>
 
-        <x-social-meta :title="$hostel->title" :description="$hostel->address" :image="$hostel->getFirstMediaUrl()" />
-    </x-slot>
+            <x-social-meta :title="$hostel->title" :description="$hostel->address" :image="$hostel->getFirstMediaUrl()" />
+        </x-slot>
 
-    <x-header.search class="mb-4 border-b" />
+        <x-header.search class="mb-4 border-b" />
 
-    <div class="container mx-auto px-4">
-        {{-- Title --}}
-        <div class="flex-col items-center border-b-2 border-slate-500">
-            <div>
-                <h1 class="text-9xl font-bold">{{ $hostel->title }}</h1>
-            </div>
-            <div class="flex items-center pb-5">
-                <div class="flex items-center font-bold">
-                    {{ round($hostel->votes_avg_score * 5, 2) }}
-                    <x-heroicon-s-star class="inline-block h-4" />
-                    <x-bi-dot />
-                    {{ $hostel->votes_count }} reviews
+        <div class="container mx-auto px-4">
+            {{-- Title --}}
+            <div class="flex-col items-center border-b-2 border-slate-500">
+                <div>
+                    <h1 class="text-9xl font-bold">{{ $hostel->title }}</h1>
                 </div>
+                <div class="flex items-center pb-5">
+                    <div class="flex items-center font-bold">
+                        {{ round($hostel->votes_avg_score * 5, 2) }}
+                        <x-heroicon-s-star class="inline-block h-4" />
+                        <x-bi-dot />
+                        {{ $hostel->votes_count }} đánh giá
+                        <x-bi-dot />
+                        {{ $hostel->visitLogs()->count() }} lượt xem
+                    </div>
 
-                <div class="pl-9">
-                    <div class="text-sm leading-5 text-gray-500">
-                        <a href="#">{{ $hostel->address }}</a>
+                    <div class="pl-9">
+                        <div class="text-sm leading-5 text-gray-500">
+                            {{ $hostel->address }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {{-- media --}}
-        <x-hostel.image-section :hostel="$hostel" class="my-6" />
-        {{-- info --}}
-        <x-hostel.info-section :hostel="$hostel" class="my-6" />
+            {{-- media --}}
+            <x-hostel.image-section :hostel="$hostel" class="my-6" />
+            {{-- info --}}
+            <x-hostel.info-section :hostel="$hostel" class="my-6" />
 
-        {{-- comments --}}
-        <div class="border-t-2 border-b-2 border-slate-500 pb-20">
-            <livewire:comment :hostel="$hostel" />
-        </div>
-
-        {{-- map --}}
-        <div x-data="dropdown" class="my-10 px-20">
-            <div class="my-5 text-2xl font-bold">
-                Nơi bạn sẽ đến
+            {{-- comments --}}
+            <div class="border-t-2 border-b-2 border-slate-500 pb-20">
+                <livewire:comment :hostel="$hostel" />
             </div>
-            <div x-ref="map" class="h-96 w-full"></div>
+
+            {{-- map --}}
+            <div x-data="dropdown" class="my-10 px-20">
+                <div class="my-5 text-2xl font-bold">
+                    Nơi bạn sẽ đến
+                </div>
+                <div class="py-5 text-sm font-bold leading-5">
+                    <span>Địa chỉ:
+                        <a href="https://www.google.com/maps/place/ {{ $hostel->address }}" class="font-thin underline"
+                            target="_blank">
+                            {{ $hostel->address }}
+                        </a>
+                    </span>
+                </div>
+                <div x-ref="map" class="h-96 w-full"></div>
+
+            </div>
         </div>
     </div>
 
     <x-footer.simple class="mt-12" />
-
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('dropdown', () => ({
@@ -100,4 +112,5 @@
         //     }))
         // })
     </script>
+
 </x-guest-layout>

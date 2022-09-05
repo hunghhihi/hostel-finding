@@ -6,7 +6,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Comment as ModelsComment;
 use App\Models\Hostel;
+use App\Models\Vote;
 use Auth;
+use Filament\Notifications\Notification;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -39,6 +41,23 @@ class Comment extends Component
         $this->reloadHostel();
     }
 
+    public function createVote(int $score): void
+    {
+        $score = $score / 5;
+        Vote::create([
+            'score' => $score,
+            'owner_id' => Auth::id(),
+            'hostel_id' => $this->hostel->id,
+        ]);
+        Notification::make()
+            ->title('Đánh giá thành công')
+            ->success()
+            ->body('Cảm ơn bạn đã đánh giá')
+            ->send()
+        ;
+        $this->reloadHostel();
+    }
+
     public function replyComment(int $id): void
     {
         $this->validate([
@@ -57,11 +76,13 @@ class Comment extends Component
     public function reloadHostel(): void
     {
         $this->hostel = Hostel::find($this->hostel->id);
-        $this->count_comment = $this->hostel->loadCount('comments');
-        $comments = ModelsComment::where('hostel_id', $this->hostel->id)->where('parent_id', null)->orderBy('created_at', 'desc')->with('owner', 'parent', 'children')->paginate(6);
-        foreach ($comments as $comment) {
-            $comment->children->load('owner', 'parent', 'children');
-        }
+        $this->hostel->loadAggregate('votes', 'score', 'avg')->loadCount('votes', 'comments');
+        $comments = ModelsComment::with('owner', 'children.owner')
+            ->where('hostel_id', $this->hostel->id)
+            ->where('parent_id', null)
+            ->orderBy('created_at', 'desc')
+            ->paginate(6)
+        ;
     }
 
     public function render(): View

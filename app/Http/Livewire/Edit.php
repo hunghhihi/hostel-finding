@@ -34,6 +34,7 @@ class Edit extends Component implements HasForms
     public float $latitude = 0;
     public float $longitude = 0;
     public mixed $media;
+    public mixed $oldMedia;
 
     public function mount(Hostel $hostel): void
     {
@@ -47,6 +48,7 @@ class Edit extends Component implements HasForms
         $this->longitude = $hostel->longitude;
         $this->categoriesList = $hostel->categories->pluck('id');
         $this->amenitiesList = $hostel->amenities->pluck('id');
+        $this->oldMedia = $hostel->getMedia();
         $this->form->fill([ // @phpstan-ignore-line
             'title' => $this->hostel->title,
             'description' => $this->hostel->description,
@@ -80,7 +82,7 @@ class Edit extends Component implements HasForms
         Notification::make()
             ->title('Saved successfully')
             ->success()
-            ->body('Changes to the **post** have been saved.')
+            ->body('Câp nhật thông tin thành công')
             ->actions([
                 Action::make('view')
                     ->button()
@@ -88,6 +90,11 @@ class Edit extends Component implements HasForms
             ])
             ->send()
         ;
+    }
+
+    public function cancel(): void
+    {
+        $this->redirect(route('hostels.show', ['hostel' => $this->hostel]));
     }
 
     public function render(): View
@@ -110,16 +117,21 @@ class Edit extends Component implements HasForms
     {
         return [
             TextInput::make('title')
+                ->label('Tiêu đề')
                 ->required()
                 ->maxLength(255),
             TextInput::make('size')
+                ->label('Diện tích')
                 ->numeric()
                 ->required(),
             TextInput::make('monthly_price')
+                ->label('Giá mỗi tháng')
                 ->numeric()
                 ->required(),
-            MarkdownEditor::make('description'),
+            MarkdownEditor::make('description')
+                ->label('Mô tả'),
             Placeholder::make('Images')
+                ->label('Ảnh')
                 ->content('Ảnh cuối cùng sẽ là ảnh đại diện cho nhà của bạn hãy sắp xếp theo thứ tự thật chính xác!'),
             SpatieMediaLibraryFileUpload::make('media')
                 ->model($this->hostel)
@@ -128,6 +140,7 @@ class Edit extends Component implements HasForms
                 ->enableReordering()
                 ->minFiles(5),
             TextInput::make('address')
+                ->label('Địa chỉ')
                 ->required()
                 ->disabled()
                 ->maxLength(255),

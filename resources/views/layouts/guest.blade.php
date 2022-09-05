@@ -39,6 +39,7 @@
 
     @livewireScripts
     @stack('scripts')
+    @livewire('notifications')
 </body>
 
 </html>

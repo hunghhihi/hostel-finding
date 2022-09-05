@@ -19,7 +19,7 @@
             class="text-gray-500focus:outline-none absolute right-2 bottom-1 mb-2 mr-2 rounded-md bg-white">
             <button x-ref="modal1_button" @click="open = true"
                 class="px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out">
-                <span>Show More</span>
+                <span>Xem thêm</span>
             </button>
             <div x-cloak role="dialog" aria-labelledby="modal1_label" aria-modal="true" tabindex="0" x-show="open"
                 @click="open = false; $refs.modal1_button.focus()"
