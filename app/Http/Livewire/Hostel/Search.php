@@ -59,9 +59,6 @@ class Search extends Component
         $this->resetPage();
     }
 
-    /**
-     * TODO: show nearest hostels.
-     */
     public function showNearestHostels(): void
     {
         /** @var ?Hostel */
