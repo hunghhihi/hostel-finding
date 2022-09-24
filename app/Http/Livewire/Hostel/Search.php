@@ -45,8 +45,8 @@ class Search extends Component
 
     public function mount(): void
     {
-        $this->largestPrice = Hostel::where('found_at', '>', now())->max('monthly_price');
-        $this->smallestPrice = Hostel::where('found_at', '>', now())->min('monthly_price');
+        $this->largestPrice = Hostel::where('found_at', '>', now())->max('monthly_price') ?? 0;
+        $this->smallestPrice = Hostel::where('found_at', '>', now())->min('monthly_price') ?? 0;
     }
 
     public function updateBounds(float $north, float $south, float $west, float $east): void
