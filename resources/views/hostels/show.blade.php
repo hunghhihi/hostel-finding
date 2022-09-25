@@ -154,7 +154,7 @@
                     <img class="mr-4 h-20 w-20 rounded-full border border-indigo-50 p-1"
                         src="{{ $hostel->owner->profile_photo_url }}" alt="avatar">
                     <div>
-                        <div class="mb-2 flex gap-2">
+                        <div class="mb-2 flex flex-wrap gap-2">
                             <h3 class="font-medium">{{ $hostel->owner->name }}</h3>
                             <div class="rounded bg-blue-50 py-1 px-2 text-xs text-blue-500">
                                 {{ $hostel->owner->describe()['hostels_count'] }} nhà
