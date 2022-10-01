@@ -27,6 +27,11 @@ class ManageHostels extends Component implements HasTable
         return view('livewire.manage-hostels');
     }
 
+    public function found(Hostel $hostel): void
+    {
+        $hostel->update(['found_at' => now()]);
+    }
+
     protected function getTableQuery(): Builder
     {
         $hostel = Hostel::where('owner_id', auth()->id());
@@ -61,6 +66,11 @@ class ManageHostels extends Component implements HasTable
                 ->getStateUsing(fn (Hostel $record) => number_format($record->monthly_price, 0, '.', ',').' ₫')
                 ->searchable()
                 ->sortable(),
+            TextColumn::make('number_of_rooms')
+                ->label('Số người ở')
+                ->getStateUsing(fn (Hostel $record) => $record->number_of_rooms.' người')
+                ->searchable()
+                ->sortable(),
             TextColumn::make('updated_at')
                 ->label('Cập nhật')
                 ->getStateUsing(fn (Hostel $record) => $record->updated_at->diffForHumans()),
@@ -76,6 +86,13 @@ class ManageHostels extends Component implements HasTable
                 ->icon('feathericon-edit')
                 ->openUrlInNewTab()
                 ->visible(fn (Hostel $record): bool => Auth::user()->can('update', $record)),
+            // set found_at to now
+            Action::make('found')
+                ->label('Tìm thấy')
+                ->icon('feathericon-check')
+                ->action(function (Hostel $record): void {
+                    $record->update(['found_at' => now()]);
+                }),
             DeleteAction::make('delete')
                 ->label('Xóa')
                 ->visible(fn (Hostel $record): bool => Auth::user()->can('delete', $record)),

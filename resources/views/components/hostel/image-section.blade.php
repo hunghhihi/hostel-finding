@@ -24,7 +24,7 @@
             <div x-cloak role="dialog" aria-labelledby="modal1_label" aria-modal="true" tabindex="0" x-show="open"
                 @click="open = false; $refs.modal1_button.focus()"
                 @click.away="open = false; $refs.modal1_button.focus()"
-                class="fixed inset-0 z-[99999] overflow-auto bg-white">
+                class="fixed inset-0 z-40 overflow-auto bg-white">
                 <h3 class="text-center text-xl font-semibold text-gray-800">
                     Tất cả các ảnh
                 </h3>

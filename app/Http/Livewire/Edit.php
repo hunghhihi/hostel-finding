@@ -28,6 +28,7 @@ class Edit extends Component implements HasForms
     public string $description = '';
     public int $size = 0;
     public int $monthly_price = 0;
+    public int $number_of_rooms = 0;
     public string $address = '';
     public Collection $categoriesList;
     public Collection $amenitiesList;
@@ -43,6 +44,7 @@ class Edit extends Component implements HasForms
         $this->description = $hostel->description;
         $this->size = $hostel->size;
         $this->monthly_price = $hostel->monthly_price;
+        $this->number_of_rooms = $hostel->number_of_rooms;
         $this->address = $hostel->address;
         $this->latitude = $hostel->latitude;
         $this->longitude = $hostel->longitude;
@@ -73,6 +75,7 @@ class Edit extends Component implements HasForms
             'description' => $data['description'],
             'size' => $data['size'],
             'monthly_price' => $data['monthly_price'],
+            'number_of_rooms' => $data['number_of_rooms'],
             'address' => $data['address'],
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
@@ -126,6 +129,10 @@ class Edit extends Component implements HasForms
                 ->required(),
             TextInput::make('monthly_price')
                 ->label('Giá mỗi tháng')
+                ->numeric()
+                ->required(),
+            TextInput::make('number_of_rooms')
+                ->label('Số người ở')
                 ->numeric()
                 ->required(),
             MarkdownEditor::make('description')

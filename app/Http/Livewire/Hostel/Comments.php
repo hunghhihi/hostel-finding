@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Hostel;
 
 use App\Models\Comment;
 use App\Models\Hostel;
+use Auth;
 use Filament\Notifications\Notification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\View\View;
@@ -17,6 +18,7 @@ class Comments extends Component
 
     public Hostel $hostel;
     public string $content = '';
+    public ?string $reply = null;
 
     protected array $rules = [
         'content' => ['required', 'min:3'],
@@ -25,6 +27,21 @@ class Comments extends Component
     public function mount(Hostel $hostel): void
     {
         $this->hostel = $hostel;
+    }
+
+    public function replyComment(int $id): void
+    {
+        $this->validate([
+            'reply' => 'required|string',
+        ]);
+        Comment::create([
+            'content' => $this->reply,
+            'owner_id' => Auth::id(),
+            'parent_id' => $id,
+            'hostel_id' => $this->hostel->id,
+        ]);
+        $this->reply = '';
+        $this->hostel->load('comments.children.owner');
     }
 
     public function submit(): void
@@ -49,8 +66,15 @@ class Comments extends Component
 
     public function render(): View
     {
+        $comments = Comment::with('owner', 'children.owner')
+            ->where('hostel_id', $this->hostel->id)
+            ->where('parent_id', null)
+            ->orderBy('created_at', 'desc')
+            ->paginate(6)
+        ;
+
         return view('livewire.hostel.comments', [
-            'comments' => $this->hostel->comments,
+            'comments' => $comments,
         ]);
     }
 }
