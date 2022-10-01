@@ -45,11 +45,11 @@
                     <div x-ref="map" wire:ignore class="h-96 w-full"></div>
                     <div class="flex">
                         <span
-                            class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400">
+                            class="inline-flex items-center border border-r-0 border-gray-300 bg-gray-200 px-3 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-400">
                             Địa chỉ
                         </span>
                         <input type="text" wire:model="address" disabled
-                            class="block w-full min-w-0 flex-1 rounded-none rounded-r-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            class="block w-full min-w-0 flex-1 border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             placeholder="...">
                     </div>
                 </div>
@@ -80,16 +80,18 @@
         </div>
     </div>
     <div class="space-y-6 divide-y divide-gray-200 pt-8 sm:space-y-5 sm:pt-10">
-        <div class="space-y-6 divide-y divide-gray-200 sm:space-y-5">
+        <div class="gap-10 space-y-6 divide-y divide-gray-200 sm:grid sm:grid-cols-2 sm:space-y-5">
             <div class="pt-6 sm:pt-5">
                 <div role="group" aria-labelledby="label-email">
-                    <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4">
+                    <div
+                        class="border-t-2 sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4 sm:border-gray-200 sm:pt-5">
                         <div>
                             <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
-                                id="label-email">Các danh mục</div>
+                                id="label-email">
+                                Các danh mục</div>
                         </div>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <div class="max-w-lg space-y-4">
+                            <div wire:ignore class="max-w-lg space-y-4">
                                 @foreach ($categories as $category)
                                     <div class="relative flex items-start">
                                         <div class="flex h-5 items-center">
@@ -110,16 +112,16 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-6 sm:pt-5">
+            <div>
                 <div role="group" aria-labelledby="label-notifications">
-                    <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-baseline sm:gap-4 sm:pt-5">
                         <div>
                             <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
                                 id="label-notifications">Các tiện nghi</div>
                         </div>
                         <div class="sm:col-span-2">
                             <div class="max-w-lg">
-                                <div class="mt-4 space-y-4">
+                                <div class="space-y-4">
                                     @foreach ($amenities as $amenity)
                                         <div class="relative flex items-start">
                                             <div class="flex h-5 items-center">
@@ -146,10 +148,15 @@
 
     <div class="pt-5">
         <div class="flex justify-end">
-            <button type="button"
-                class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Cancel</button>
+            <button type="button" wire:click="backToHome"
+                class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Hủy bỏ
+            </button>
             <button wire:loading.attr='disabled' type="submit"
-                class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-500">Save</button>
+                class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-500">
+                <x-uiw-loading wire:loading class="h-5 w-5 animate-spin" />
+                Tạo mới
+            </button>
         </div>
     </div>
 </form>

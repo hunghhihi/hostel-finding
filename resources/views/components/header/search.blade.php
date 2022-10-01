@@ -11,7 +11,7 @@
             class="flex flex-1 items-center justify-between gap-2 rounded-full px-4 py-2 shadow-md md:w-[30vw] md:min-w-[380px] md:flex-initial">
             <input x-ref="search" type="text" name="address" placeholder="Nhập địa điểm"
                 class="flex-1 border-transparent focus:border-transparent focus:ring-0" />
-            <button type="submit" class="rounded-full bg-primary-500 p-2">
+            <button type="submit" class="rounded-full bg-primary-500 p-2" id="header-search-button">
                 <x-heroicon-o-search class="h-5 w-5 text-white" />
             </button>
         </form>
@@ -59,13 +59,17 @@
             </div>
 
             <div x-cloak x-show="show" @click.outside="show = false" x-transition
-                class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                 @auth
                     <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
                         tabindex="-1" id="user-menu-item-0">Hồ sơ</a>
+                    <a href="{{ route('hostels.create') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                        tabindex="-1" id="user-menu-item-0">Đăng tin</a>
                     <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
                         tabindex="-1" id="user-menu-item-0">Bảng điều khiển</a>
+                    <a href="{{ route('hostels.manage') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                        tabindex="-1" id="user-menu-item-0">Quản lý nhà trọ</a>
                     <form x-data method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="block px-4 py-2 text-sm text-gray-700" href="{{ route('logout') }}"
@@ -133,10 +137,17 @@
                         }
                     }
 
+                    const north = lat + 0.015;
+                    const south = lat - 0.015;
+                    const east = lng + 0.015;
+                    const west = lng - 0.015;
+
                     window.location.href = @json(route('hostels.search')) +
                         '?address=' + address +
-                        '&latitude=' + lat +
-                        '&longitude=' + lng;
+                        '&north=' + north +
+                        '&south=' + south +
+                        '&east=' + east +
+                        '&west=' + west;
                 }
             }))
         })

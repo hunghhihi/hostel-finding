@@ -15,7 +15,6 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -30,30 +29,40 @@ class ManageHostels extends Component implements HasTable
 
     protected function getTableQuery(): Builder
     {
-        return Hostel::where('owner_id', auth()->id());
+        $hostel = Hostel::where('owner_id', auth()->id());
+        $hostel->withAvg('votes', 'score');
+
+        return $hostel;
     }
 
     protected function getTableColumns(): array
     {
         return [
             TextColumn::make('title')
+                ->label('Tiêu đề')
                 ->searchable(),
             BooleanColumn::make('found')
+                ->label('Tìm thấy')
                 ->getStateUsing(fn (Hostel $record) => $record->found_at->lte(now())),
             TextColumn::make('address')
+                ->label('Địa chỉ')
                 ->searchable(),
             TextColumn::make('score')
+                ->label('Điểm')
                 ->avg('votes', 'score')
-                ->getStateUsing(fn (Hostel $record) => $record->votes_score * 5 .' ✯'), // @phpstan-ignore-line
+                ->getStateUsing(fn (Hostel $record) => $record->votes_avg_score * 5 .' ✯'), // @phpstan-ignore-line
             TextColumn::make('size')
+                ->label('Kích thước')
                 ->getStateUsing(fn (Hostel $record) => $record->size.' m²')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('monthly_price')
+                ->label('Giá mỗi tháng')
                 ->getStateUsing(fn (Hostel $record) => number_format($record->monthly_price, 0, '.', ',').' ₫')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('updated_at')
+                ->label('Cập nhật')
                 ->getStateUsing(fn (Hostel $record) => $record->updated_at->diffForHumans()),
         ];
     }
@@ -62,11 +71,13 @@ class ManageHostels extends Component implements HasTable
     {
         return [
             Action::make('edit')
+                ->label('Sửa')
                 ->url(fn (Hostel $record): string => route('hostels.edit', $record))
                 ->icon('feathericon-edit')
                 ->openUrlInNewTab()
                 ->visible(fn (Hostel $record): bool => Auth::user()->can('update', $record)),
             DeleteAction::make('delete')
+                ->label('Xóa')
                 ->visible(fn (Hostel $record): bool => Auth::user()->can('delete', $record)),
         ];
     }
@@ -91,7 +102,7 @@ class ManageHostels extends Component implements HasTable
 
     protected function getTableRecordUrlUsing(): Closure
     {
-        return fn (Model $record): string => route('hostels.show', ['hostel' => $record]);
+        return fn (Hostel $record): string => route('hostels.show', ['hostel' => $record]);
     }
 
     protected function getTableEmptyStateIcon(): ?string
@@ -101,19 +112,19 @@ class ManageHostels extends Component implements HasTable
 
     protected function getTableEmptyStateHeading(): ?string
     {
-        return 'No posts yet';
+        return 'Bạn chưa có nhà trọ nào';
     }
 
     protected function getTableEmptyStateDescription(): ?string
     {
-        return 'You may create a post using the button below.';
+        return 'Bạn có thể tạo nhà trọ mới bằng cách nhấn vào nút bên dưới';
     }
 
     protected function getTableEmptyStateActions(): array
     {
         return [
             Action::make('create')
-                ->label('Create post')
+                ->label('Tạo mới nhà trọ')
                 ->url(route('hostels.create'))
                 ->icon('heroicon-o-plus')
                 ->button(),
