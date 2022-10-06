@@ -12,9 +12,9 @@
             @endforeach
         </select>
         <div class="overflow-hidden bg-white shadow sm:rounded-md">
-            @if (count($notifications) > 0)
+            @if (count($notify) > 0)
                 <ul class="divide-y divide-gray-200">
-                    @foreach ($notifications as $item)
+                    @foreach ($notify as $item)
                         @if ($item['pivot']['active'] == 0)
                             <li class="px-4 py-4 font-black sm:px-6">
                                 <div>
@@ -76,6 +76,9 @@
                     <p class="text-gray-500">Không có thông báo nào</p>
                 </div>
             @endif
+        </div>
+        <div class="py-6">
+            {{ $notify->links('paginations.centered-simple', ['livewire' => true]) }}
         </div>
     </div>
 </div>

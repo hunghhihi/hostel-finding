@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('hostels.index') }}">
                         <img src="https://laravel.com/img/logotype.min.svg" alt="logo" class="h-7">
                     </a>
                 </div>
