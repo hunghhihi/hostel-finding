@@ -3,6 +3,7 @@
         <select
             class="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             wire:model="hostelId" wire:change="changeHostel">
+            <option value="0">Chọn</option>
             @foreach ($hostels as $hostel)
                 <option value="{{ $hostel->id }}">{{ $hostel->title }}
                     @if ($countNotifications[$hostel->id] > 0)
@@ -12,9 +13,9 @@
             @endforeach
         </select>
         <div class="overflow-hidden bg-white shadow sm:rounded-md">
-            @if (count($notify) > 0)
+            @if (count($notifications) > 0)
                 <ul class="divide-y divide-gray-200">
-                    @foreach ($notify as $item)
+                    @foreach ($notifications as $item)
                         @if ($item['pivot']['active'] == 0)
                             <li class="px-4 py-4 font-black sm:px-6">
                                 <div>
@@ -77,8 +78,10 @@
                 </div>
             @endif
         </div>
-        <div class="py-6">
-            {{ $notify->links('paginations.centered-simple', ['livewire' => true]) }}
-        </div>
+        @if (count($notifications) > 0)
+            <div class="flex justify-center">
+                {{ $notify->links() }}
+            </div>
+        @endif
     </div>
 </div>

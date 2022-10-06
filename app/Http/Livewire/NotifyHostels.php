@@ -19,8 +19,13 @@ class NotifyHostels extends Component
 
     public function mount(): void
     {
-        $this->hostelId = Auth::user()->hostels->first()->id;
-        $this->hostel = Hostel::find($this->hostelId);
+        if (Hostel::where('owner_id', Auth::id())->exists()) {
+            $this->hostel = Hostel::where('owner_id', Auth::id())->first();
+            $this->hostelId = $this->hostel->id;
+        } else {
+            $this->hostelId = 0;
+            $this->hostel = new Hostel();
+        }
     }
 
     public function changeHostel(): void
@@ -36,14 +41,18 @@ class NotifyHostels extends Component
 
     public function render(): View
     {
-        $hostels = Auth::user()->hostels;
+        $hostels = Hostel::where('owner_id', Auth::id())->get();
         $countNotifications = [];
         foreach ($hostels as $hostel) {
-            $countNotifications[$hostel->id] = $hostel->subscribers()->where('active', false)->count();
+            $countNotifications[$hostel->id] = $hostel->subscribers()->wherePivot('active', false)->count();
         }
-
         $notify = $this->hostel->subscribers()->paginate(10);
+        $this->notifications = $notify->toArray()['data'];
 
-        return view('livewire.notify-hostels', ['hostels' => $hostels, 'countNotifications' => $countNotifications, 'notify' => $notify]);
+        return view('livewire.notify-hostels', [
+            'hostels' => $hostels,
+            'countNotifications' => $countNotifications,
+            'notify' => $notify,
+        ]);
     }
 }
