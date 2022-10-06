@@ -21,6 +21,11 @@
                         Quản lý nhà trọ
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('hostels.notify') }}" :active="request()->routeIs('hostels.notify')">
+                        Thông báo
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:ml-6 sm:flex sm:items-center">

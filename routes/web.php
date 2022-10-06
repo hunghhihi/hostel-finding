@@ -49,6 +49,11 @@ Route::get('hostels/{hostel}/edit', [HostelController::class, 'edit'])
     ->middleware('auth')
 ;
 
+Route::get('notify', [HostelController::class, 'notify'])
+    ->name('hostels.notify')
+    ->middleware('auth')
+;
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

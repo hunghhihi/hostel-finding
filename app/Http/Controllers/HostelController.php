@@ -44,4 +44,9 @@ class HostelController extends Controller
             'hostel' => $hostel,
         ]);
     }
+
+    public function notify(): View
+    {
+        return view('hostels.notify');
+    }
 }

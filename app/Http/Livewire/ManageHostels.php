@@ -86,13 +86,13 @@ class ManageHostels extends Component implements HasTable
                 ->icon('feathericon-edit')
                 ->openUrlInNewTab()
                 ->visible(fn (Hostel $record): bool => Auth::user()->can('update', $record)),
-            // set found_at to now
             Action::make('found')
-                ->label('Tìm thấy')
+                ->label('')
                 ->icon('feathericon-check')
                 ->action(function (Hostel $record): void {
                     $record->update(['found_at' => now()]);
-                }),
+                })
+                ->visible(fn (Hostel $record): bool => Auth::user()->can('update', $record)),
             DeleteAction::make('delete')
                 ->label('Xóa')
                 ->visible(fn (Hostel $record): bool => Auth::user()->can('delete', $record)),
