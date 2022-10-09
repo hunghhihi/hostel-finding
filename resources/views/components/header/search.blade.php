@@ -88,7 +88,6 @@
                 @endauth
             </div>
         </div>
-        </div>
     </x-container>
 
     <script>
