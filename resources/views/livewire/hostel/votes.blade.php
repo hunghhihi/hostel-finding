@@ -1,11 +1,25 @@
 <div x-data="livewire_hostel_votes">
+    <div class="mt-1 flex flex-wrap items-center gap-2 pb-5">
+        <div class="mt-1 flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1.5 font-semibold text-gray-500">
+                {{ round($score * 5, 2) }}
+                <x-heroicon-s-star class="inline-block h-4" />
+            </div>
+        </div>
+        <div class="mt-1 flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1.5 font-semibold text-gray-500">
+                {{ $count }} đánh giá
+            </div>
+        </div>
+    </div>
     <div class="divide-y divide-gray-200">
         <ul role="list" class="space-y-8">
             @foreach ($votes as $vote)
                 <li>
                     <div class="flex space-x-3">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" src="{{ $vote->owner->profile_photo_url }}" alt="avatar">
+                            <img class="h-10 w-10 rounded-full" src="{{ $vote->owner->profile_photo_url }}"
+                                alt="avatar">
                         </div>
                         <div>
                             <div class="text-sm">

@@ -67,6 +67,18 @@
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
+                    <label for="title" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Số người tối
+                        đa
+                    </label>
+                    <div class="mt-1 sm:col-span-2 sm:mt-0">
+                        <div class="flex max-w-lg rounded-md shadow-sm">
+                            <input required type="number" wire:model.defer='number_of_rooms' name="number_of_rooms"
+                                min="1"
+                                class="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                     <label for="title" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Giá
                     </label>
                     <div class="mt-1 sm:col-span-2 sm:mt-0">

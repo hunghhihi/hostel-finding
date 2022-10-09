@@ -15,7 +15,6 @@
                 <x-heroicon-o-search class="h-5 w-5 text-white" />
             </button>
         </form>
-
         {{-- menu & dropdown --}}
         <div x-data="{
             show: false,
@@ -70,6 +69,8 @@
                         tabindex="-1" id="user-menu-item-0">Bảng điều khiển</a>
                     <a href="{{ route('hostels.manage') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
                         tabindex="-1" id="user-menu-item-0">Quản lý nhà trọ</a>
+                    <a href="{{ route('hostels.notify') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                        tabindex="-1" id="user-menu-item-0">Thông báo</a>
                     <form x-data method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="block px-4 py-2 text-sm text-gray-700" href="{{ route('logout') }}"
@@ -86,6 +87,7 @@
                         tabindex="-1" id="user-menu-item-2">Đăng nhập</a>
                 @endauth
             </div>
+        </div>
         </div>
     </x-container>
 
