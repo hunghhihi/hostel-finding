@@ -18,6 +18,7 @@ return new class() extends Migration
         Schema::create('hostel_user', function (Blueprint $table): void {
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Hostel::class)->constrained()->cascadeOnDelete();
+            $table->boolean('active')->default(false);
             $table->timestamps();
 
             $table->primary(['user_id', 'hostel_id']);

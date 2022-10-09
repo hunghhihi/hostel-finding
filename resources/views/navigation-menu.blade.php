@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('hostels.index') }}">
                         <img src="https://laravel.com/img/logotype.min.svg" alt="logo" class="h-7">
                     </a>
                 </div>
@@ -19,6 +19,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('hostels.manage') }}" :active="request()->routeIs('hostels.manage')">
                         Quản lý nhà trọ
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('hostels.notify') }}" :active="request()->routeIs('hostels.notify')">
+                        Thông báo
                     </x-jet-nav-link>
                 </div>
             </div>

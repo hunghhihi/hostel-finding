@@ -14,13 +14,6 @@
         {{-- Overview --}}
         <div class="mt-1 flex flex-wrap items-center gap-2">
             <div class="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1.5 font-semibold text-gray-500">
-                {{ round($hostel->votes_avg_score * 5, 2) }}
-                <x-heroicon-s-star class="inline-block h-4 text-yellow-500" />
-            </div>
-            <div class="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1.5 font-semibold text-gray-500">
-                {{ $hostel->votes_count }} đánh giá
-            </div>
-            <div class="flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1.5 font-semibold text-gray-500">
                 {{ $hostel->visit_logs_count }} lượt xem
             </div>
         </div>
@@ -107,7 +100,7 @@
                         </svg>
                         <div>
                             {{-- TODO: replace with actual value --}}
-                            <span class="font-bold">{{ 3 }}</span>
+                            <span class="font-bold">{{ $hostel->allowable_number_of_people }}</span>
                             <span class="text-sm">người ở</span>
                         </div>
                     </li>

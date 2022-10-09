@@ -54,6 +54,8 @@ class Votes extends Component
     {
         return view('livewire.hostel.votes', [
             'votes' => $this->hostel->votes,
+            'score' => $this->hostel->votes->avg('score'),
+            'count' => $this->hostel->votes->count(),
         ]);
     }
 }

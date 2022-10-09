@@ -31,18 +31,17 @@ class Hostel extends Model implements HasMedia
         'longitude',
         'size',
         'monthly_price',
+        'allowable_number_of_people',
         'owner_id',
     ];
 
-    protected $hidden = [
-    ];
+    protected $hidden = [];
 
     protected $casts = [
         'found_at' => 'datetime',
     ];
 
-    protected $appends = [
-    ];
+    protected $appends = [];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -84,7 +83,7 @@ class Hostel extends Model implements HasMedia
 
     public function subscribers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('active');
     }
 
     public function registerMediaCollections(): void
