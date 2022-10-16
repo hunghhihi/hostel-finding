@@ -6,27 +6,62 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form
+            method="POST"
+            action="{{ route('password.update') }}"
+        >
             @csrf
 
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+            <input
+                type="hidden"
+                name="token"
+                value="{{ $request->route('token') }}"
+            >
 
             <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="mt-1 block w-full" type="email" name="email" :value="old('email', $request->email)"
-                    required autofocus />
+                <x-jet-label
+                    for="email"
+                    value="{{ __('Email') }}"
+                />
+                <x-jet-input
+                    id="email"
+                    class="mt-1 block w-full"
+                    type="email"
+                    name="email"
+                    :value="old('email', $request->email)"
+                    required
+                    autofocus
+                />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="mt-1 block w-full" type="password" name="password" required
-                    autocomplete="new-password" />
+                <x-jet-label
+                    for="password"
+                    value="{{ __('Password') }}"
+                />
+                <x-jet-input
+                    id="password"
+                    class="mt-1 block w-full"
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="new-password"
+                />
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="mt-1 block w-full" type="password"
-                    name="password_confirmation" required autocomplete="new-password" />
+                <x-jet-label
+                    for="password_confirmation"
+                    value="{{ __('Confirm Password') }}"
+                />
+                <x-jet-input
+                    id="password_confirmation"
+                    class="mt-1 block w-full"
+                    type="password"
+                    name="password_confirmation"
+                    required
+                    autocomplete="new-password"
+                />
             </div>
 
             <div class="mt-4 flex items-center justify-end">

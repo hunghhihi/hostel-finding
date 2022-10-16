@@ -22,7 +22,10 @@ $url = route('hostels.show', [$hostel]);
     </div>
 
     {{-- title & address --}}
-    <a href="{{ $url }}" class="block flex-1">
+    <a
+        href="{{ $url }}"
+        class="block flex-1"
+    >
         <div>
             <span class="text-lg font-medium text-gray-800 line-clamp-1 group-hover:text-primary-800">
                 {{ $hostel->title }}

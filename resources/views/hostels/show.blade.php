@@ -2,7 +2,11 @@
     <x-slot name="head">
         <title>{{ $hostel->title }}</title>
 
-        <x-social-meta :title="$hostel->title" :description="$hostel->address" :image="$hostel->getFirstMediaUrl()" />
+        <x-social-meta
+            :title="$hostel->title"
+            :description="$hostel->address"
+            :image="$hostel->getFirstMediaUrl()"
+        />
     </x-slot>
 
     <x-header.search class="mb-4 border-b" />
@@ -20,20 +24,39 @@
 
         {{-- Address --}}
         <div class="mt-2 flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="h-5 w-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-5 w-5"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
             </svg>
-            <a href="{{ 'https://www.google.com/maps?q=loc:' . $hostel->latitude . ',' . $hostel->longitude }}"
-                class="text-sm font-thin text-gray-600 underline hover:text-primary-600" target="_blank">
+            <a
+                href="{{ 'https://www.google.com/maps?q=loc:' . $hostel->latitude . ',' . $hostel->longitude }}"
+                class="text-sm font-thin text-gray-600 underline hover:text-primary-600"
+                target="_blank"
+            >
                 {{ $hostel->address }}
             </a>
         </div>
 
         {{-- media --}}
-        <x-hostel.image-section :hostel="$hostel" class="my-6" />
+        <x-hostel.image-section
+            :hostel="$hostel"
+            class="my-6"
+        />
         {{-- info --}}
 
         <div class="grid grid-cols-3 gap-4">
@@ -70,10 +93,19 @@
 
                 <ul class="space-y-2">
                     <li class="flex items-center gap-2 text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-6 w-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+                            />
                         </svg>
                         <div>
                             <span class="font-bold">{{ number_format($hostel->monthly_price) }}₫</span>
@@ -81,10 +113,19 @@
                         </div>
                     </li>
                     <li class="flex items-center gap-2 text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-6 w-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
+                            />
                         </svg>
 
                         <div>
@@ -93,10 +134,19 @@
                         </div>
                     </li>
                     <li class="flex items-center gap-2 text-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-6 w-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
+                            />
                         </svg>
                         <div>
                             {{-- TODO: replace with actual value --}}
@@ -109,32 +159,63 @@
         </div>
 
         <div class="mt-4 space-y-2 rounded-md px-4 py-6 shadow">
-            <h2 id="notes-title" class="mb-4 text-lg font-medium text-gray-800">Bình luận</h2>
+            <h2
+                id="notes-title"
+                class="mb-4 text-lg font-medium text-gray-800"
+            >Bình luận</h2>
             <div>
                 <livewire:hostel.comments :hostel="$hostel" />
             </div>
         </div>
 
         {{-- map --}}
-        <div x-data="dropdown" class="mt-8 space-y-2">
-            <h2 id="notes-title" class="text-lg font-medium text-gray-800">Nơi bạn sẽ đến</h2>
+        <div
+            x-data="dropdown"
+            class="mt-8 space-y-2"
+        >
+            <h2
+                id="notes-title"
+                class="text-lg font-medium text-gray-800"
+            >Nơi bạn sẽ đến</h2>
             <div class="mt-2 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-5 w-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-5 w-5"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                    />
                 </svg>
-                <a href="{{ 'https://www.google.com/maps?q=loc:' . $hostel->latitude . ',' . $hostel->longitude }}"
-                    class="text-sm font-thin text-gray-600 underline hover:text-primary-600" target="_blank">
+                <a
+                    href="{{ 'https://www.google.com/maps?q=loc:' . $hostel->latitude . ',' . $hostel->longitude }}"
+                    class="text-sm font-thin text-gray-600 underline hover:text-primary-600"
+                    target="_blank"
+                >
                     {{ $hostel->address }}
                 </a>
             </div>
-            <div x-ref="map" class="h-96 w-full"></div>
+            <div
+                x-ref="map"
+                class="h-96 w-full"
+            ></div>
         </div>
 
         <div class="mt-8 space-y-2 rounded-md px-4 py-6 shadow">
-            <h2 id="notes-title" class="mb-4 text-lg font-medium text-gray-800">Đánh giá</h2>
+            <h2
+                id="notes-title"
+                class="mb-4 text-lg font-medium text-gray-800"
+            >Đánh giá</h2>
             <div>
                 <livewire:hostel.votes :hostel="$hostel" />
             </div>
@@ -144,8 +225,11 @@
         <div class="mt-8 rounded-md bg-white p-6 shadow">
             <div class="mb-4 flex justify-between">
                 <div class="flex items-center">
-                    <img class="mr-4 h-20 w-20 rounded-full border border-indigo-50 p-1"
-                        src="{{ $hostel->owner->profile_photo_url }}" alt="avatar">
+                    <img
+                        class="mr-4 h-20 w-20 rounded-full border border-indigo-50 p-1"
+                        src="{{ $hostel->owner->profile_photo_url }}"
+                        alt="avatar"
+                    >
                     <div>
                         <div class="mb-2 flex flex-wrap gap-2">
                             <h3 class="font-medium">{{ $hostel->owner->name }}</h3>
@@ -169,11 +253,17 @@
                     </div>
                 </div>
                 <button class="mt-6 self-start focus:outline-none">
-                    <svg class="h-3 w-3 text-gray-200" viewBox="0 0 12 4" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-1-4">
+                    <svg
+                        class="h-3 w-3 text-gray-200"
+                        viewBox="0 0 12 4"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        data-config-id="auto-svg-1-4"
+                    >
                         <path
                             d="M6 0.666687C5.26667 0.666687 4.66667 1.26669 4.66667 2.00002C4.66667 2.73335 5.26667 3.33335 6 3.33335C6.73333 3.33335 7.33333 2.73335 7.33333 2.00002C7.33333 1.26669 6.73333 0.666687 6 0.666687ZM1.33333 0.666687C0.6 0.666687 0 1.26669 0 2.00002C0 2.73335 0.6 3.33335 1.33333 3.33335C2.06667 3.33335 2.66667 2.73335 2.66667 2.00002C2.66667 1.26669 2.06667 0.666687 1.33333 0.666687ZM10.6667 0.666687C9.93333 0.666687 9.33333 1.26669 9.33333 2.00002C9.33333 2.73335 9.93333 3.33335 10.6667 3.33335C11.4 3.33335 12 2.73335 12 2.00002C12 1.26669 11.4 0.666687 10.6667 0.666687Z"
-                            fill="currentColor"></path>
+                            fill="currentColor"
+                        ></path>
                     </svg>
                 </button>
             </div>
@@ -184,13 +274,19 @@
                     <div class="flex items-center gap-2">
                         <div class="flex items-center gap-2">
                             @foreach (range(1, 5) as $current)
-                                <svg @class([
-                                    $star >= $current ? 'text-yellow-500' : 'text-gray-500',
-                                    'inline-block h-5',
-                                ]) xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg
+                                    @class([
+                                        $star >= $current ? 'text-yellow-500' : 'text-gray-500',
+                                        'inline-block h-5',
+                                    ])
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
                                     <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    >
                                     </path>
                                 </svg>
                             @endforeach
@@ -206,11 +302,21 @@
                 <div class="mb-2 w-full px-2 md:mb-0">
                     <button
                         class="flex w-full items-center justify-center gap-2 rounded bg-indigo-500 py-2 text-sm text-white transition duration-200 hover:bg-indigo-600"
-                        onclick="navigator.clipboard.writeText('{{ $hostel->owner->phone_number }}');">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                        onclick="navigator.clipboard.writeText('{{ $hostel->owner->phone_number }}');"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-6 w-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                            />
                         </svg>
                         <span data-config-id="primary-action1">{{ $hostel->owner->phone_number }}</span>
                     </button>

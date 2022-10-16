@@ -10,13 +10,26 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.confirm') }}">
+        <form
+            method="POST"
+            action="{{ route('password.confirm') }}"
+        >
             @csrf
 
             <div>
-                <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="mt-1 block w-full" type="password" name="password" required
-                    autocomplete="current-password" autofocus />
+                <x-jet-label
+                    for="password"
+                    value="{{ __('Password') }}"
+                />
+                <x-jet-input
+                    id="password"
+                    class="mt-1 block w-full"
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    autofocus
+                />
             </div>
 
             <div class="mt-4 flex justify-end">

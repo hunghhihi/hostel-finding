@@ -1,17 +1,32 @@
-<div x-data="livewire_hostel_partials_filter_price" class="space-y-2">
+<div
+    x-data="livewire_hostel_partials_filter_price"
+    class="space-y-2"
+>
     <h3 class="text-2xl font-semibold text-gray-800">Giá hàng tháng</h3>
 
     <div class="flex items-center justify-between gap-3">
         <div class="flex-1">
-            <input x-ref="minPrice" x-mask:dynamic="'₫' + $money($input)" type="text" @input="onInputMinPrice"
-                @blur="onBlurMinPrice" class="w-full rounded border border-gray-200 text-center">
+            <input
+                x-ref="minPrice"
+                x-mask:dynamic="'₫' + $money($input)"
+                type="text"
+                @input="onInputMinPrice"
+                @blur="onBlurMinPrice"
+                class="w-full rounded border border-gray-200 text-center"
+            >
         </div>
 
         <span> – </span>
 
         <div class="flex-1">
-            <input x-ref="maxPrice" x-mask:dynamic="'₫' + $money($input)" type="text" @input="onInputMaxPrice"
-                @blur="onBlurMaxPrice" class="w-full rounded border border-gray-200 text-center">
+            <input
+                x-ref="maxPrice"
+                x-mask:dynamic="'₫' + $money($input)"
+                type="text"
+                @input="onInputMaxPrice"
+                @blur="onBlurMaxPrice"
+                class="w-full rounded border border-gray-200 text-center"
+            >
         </div>
     </div>
 

@@ -16,13 +16,26 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.email') }}">
+        <form
+            method="POST"
+            action="{{ route('password.email') }}"
+        >
             @csrf
 
             <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="mt-1 block w-full" type="email" name="email" :value="old('email')"
-                    required autofocus />
+                <x-jet-label
+                    for="email"
+                    value="{{ __('Email') }}"
+                />
+                <x-jet-input
+                    id="email"
+                    class="mt-1 block w-full"
+                    type="email"
+                    name="email"
+                    :value="old('email')"
+                    required
+                    autofocus
+                />
             </div>
 
             <div class="mt-4 flex items-center justify-end">
