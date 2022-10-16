@@ -19,9 +19,11 @@
                                         <p>{{ $comment->content }}</p>
                                     </div>
                                     <div x-data="{ reply: false }">
-                                        <button @click="reply = !reply" class="text-sm leading-5 text-gray-500">
-                                            Phản hồi
-                                        </button>
+                                        @auth
+                                            <button @click="reply = !reply" class="text-sm leading-5 text-gray-500">
+                                                Phản hồi
+                                            </button>
+                                        @endauth
                                         <div x-show="reply">
                                             <div class="mt-1">
                                                 <form wire:submit.prevent="replyComment({{ $comment->id }})"

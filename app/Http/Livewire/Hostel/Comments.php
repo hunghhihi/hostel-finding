@@ -31,6 +31,8 @@ class Comments extends Component
 
     public function replyComment(int $id): void
     {
+        $this->authorize('create', [Comment::class, $this->hostel]);
+
         $this->validate([
             'reply' => 'required|string',
         ]);
