@@ -14,7 +14,6 @@ use App\Models\Vote;
 use Arr;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\UploadedFile;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,7 +26,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->setUpFaker();
 
-        $users = User::factory(10)->create()->tap(function ($users): void {
+        $hosteller = User::factory()->create([
+            'name' => 'Phạm Nhật Vượng',
+            'email' => 'hosteller@example.com',
+        ]);
+
+        $users = User::factory(10)->create()->add($hosteller)->add($hosteller)->tap(function ($users): void {
             $users->each->assignRole('hosteller');
         });
         $amenities = Amenity::factory(10)->create();
@@ -53,37 +57,33 @@ class DatabaseSeeder extends Seeder
 
                 $hostel->addMedia($this->getRandomHostelImagePath())
                     ->preservingOriginal()
-                    ->setFileName('fake')
+                    ->setFileName('fake.webp')
                     ->toMediaCollection()
                 ;
 
                 $hostel->addMedia($this->getRandomHostelImagePath())
                     ->preservingOriginal()
-                    ->setFileName('fake')
+                    ->setFileName('fake.webp')
                     ->toMediaCollection()
                 ;
 
                 $hostel->addMedia($this->getRandomHostelImagePath())
                     ->preservingOriginal()
-                    ->setFileName('fake')
+                    ->setFileName('fake.webp')
                     ->toMediaCollection()
                 ;
 
                 $hostel->addMedia($this->getRandomHostelImagePath())
                     ->preservingOriginal()
-                    ->setFileName('fake')
+                    ->setFileName('fake.webp')
                     ->toMediaCollection()
                 ;
 
                 $hostel->addMedia($this->getRandomHostelImagePath())
                     ->preservingOriginal()
-                    ->setFileName('fake')
+                    ->setFileName('fake.webp')
                     ->toMediaCollection()
                 ;
-
-                if (random_int(0, 1)) {
-                    $hostel->addMedia(UploadedFile::fake()->image('fake2.jpg', 640, 480))->toMediaCollection();
-                }
             }
         }
     }
