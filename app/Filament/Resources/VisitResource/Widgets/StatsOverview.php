@@ -11,6 +11,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 class StatsOverview extends BaseWidget
 {
+    public static function canView(): bool
+    {
+        return auth()->user()->can('viewAny', Visit::class);
+    }
+
     protected function getCards(): array
     {
         /** @var Builder */

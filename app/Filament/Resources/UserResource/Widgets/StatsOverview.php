@@ -10,6 +10,11 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class StatsOverview extends BaseWidget
 {
+    public static function canView(): bool
+    {
+        return auth()->user()->can('viewAny', User::class);
+    }
+
     protected function getCards(): array
     {
         return [
