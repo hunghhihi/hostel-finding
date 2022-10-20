@@ -3,14 +3,26 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+    <meta
+        name="csrf-token"
+        content="{{ csrf_token() }}"
+    >
 
     {{ $head ?? null }}
-    <link rel="icon" href="https://laravel.com/img/favicon/favicon-32x32.png" />
+    <link
+        rel="icon"
+        href="https://laravel.com/img/favicon/favicon-32x32.png"
+    />
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link
+        rel="stylesheet"
+        href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap"
+    >
 
     <style>
         [x-cloak] {

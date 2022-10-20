@@ -27,7 +27,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->setUpFaker();
 
-        $users = User::factory(10)->create();
+        $users = User::factory(10)->create()->tap(function ($users): void {
+            $users->each->assignRole('hosteller');
+        });
         $amenities = Amenity::factory(10)->create();
         $categories = Category::factory(10)->create();
 
@@ -49,16 +51,45 @@ class DatabaseSeeder extends Seeder
 
                 $hostel->visitLog(Arr::random([null, $users->random()]))->log();
 
-                $hostel->addMedia(UploadedFile::fake()->image('fake.jpg', 640, 480))->toMediaCollection();
-                $hostel->addMedia(UploadedFile::fake()->image('fake.jpg', 640, 480))->toMediaCollection();
-                $hostel->addMedia(UploadedFile::fake()->image('fake.jpg', 640, 480))->toMediaCollection();
-                $hostel->addMedia(UploadedFile::fake()->image('fake.jpg', 640, 480))->toMediaCollection();
-                $hostel->addMedia(UploadedFile::fake()->image('fake.jpg', 640, 480))->toMediaCollection();
+                $hostel->addMedia($this->getRandomHostelImagePath())
+                    ->preservingOriginal()
+                    ->setFileName('fake')
+                    ->toMediaCollection()
+                ;
+
+                $hostel->addMedia($this->getRandomHostelImagePath())
+                    ->preservingOriginal()
+                    ->setFileName('fake')
+                    ->toMediaCollection()
+                ;
+
+                $hostel->addMedia($this->getRandomHostelImagePath())
+                    ->preservingOriginal()
+                    ->setFileName('fake')
+                    ->toMediaCollection()
+                ;
+
+                $hostel->addMedia($this->getRandomHostelImagePath())
+                    ->preservingOriginal()
+                    ->setFileName('fake')
+                    ->toMediaCollection()
+                ;
+
+                $hostel->addMedia($this->getRandomHostelImagePath())
+                    ->preservingOriginal()
+                    ->setFileName('fake')
+                    ->toMediaCollection()
+                ;
 
                 if (random_int(0, 1)) {
                     $hostel->addMedia(UploadedFile::fake()->image('fake2.jpg', 640, 480))->toMediaCollection();
                 }
             }
         }
+    }
+
+    protected function getRandomHostelImagePath()
+    {
+        return __DIR__.'/hostel-images/hostel-'.random_int(1, 18).'.webp';
     }
 }

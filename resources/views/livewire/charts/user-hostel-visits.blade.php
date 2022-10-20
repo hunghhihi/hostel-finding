@@ -1,12 +1,18 @@
 <div x-data="livewire_charts_user_hostel_visits">
     <div>
-        <select class="rounded-lg border-none bg-gray-50 shadow-sm" wire:model="selectedDays">
+        <select
+            class="rounded-lg border-none bg-gray-50 shadow-sm"
+            wire:model="selectedDays"
+        >
             <option value="30">30 ngày</option>
             <option value="60">60 ngày</option>
             <option value="90">90 ngày</option>
         </select>
 
-        <canvas x-ref="chart" class="h-full w-full"></canvas>
+        <canvas
+            x-ref="chart"
+            class="h-full w-full"
+        ></canvas>
     </div>
 
     <script>

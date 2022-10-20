@@ -17,13 +17,24 @@ return new class() extends Migration
         ]);
 
         Role::create(['name' => 'supervisor'])->givePermissionTo([
-            'view.admin-page',
-            'users.view.any',
-            'hostels.view.any',
-            'comments.view.any',
-            'votes.view.any',
-            'visits.view.any',
+            'amenities.create.any',
+            'amenities.delete.any',
+            'amenities.update.any',
             'amenities.view.any',
+            'view.admin-page',
+            'hostels.create.any',
+            'hostels.delete.any',
+            'hostels.update.any',
+            'hostels.view.any',
+            'comments.delete.any',
+            'comments.update.any',
+            'comments.view.any',
+            'votes.delete.any',
+            'votes.update.any',
+            'votes.view.any',
+            'categories.create.any',
+            'categories.delete.any',
+            'categories.update.any',
             'categories.view.any',
         ]);
 

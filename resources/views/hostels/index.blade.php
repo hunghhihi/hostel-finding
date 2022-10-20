@@ -2,8 +2,11 @@
     <x-slot name="head">
         <title>Trang chủ</title>
 
-        <x-social-meta title="Nhà trọ quanh đây" description="Một trải nghiệm hoàn toàn mới về việc tìm nhà trọ"
-            image="https://images.unsplash.com/photo-1596276020587-8044fe049813?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=939&q=80" />
+        <x-social-meta
+            title="Nhà trọ quanh đây"
+            description="Một trải nghiệm hoàn toàn mới về việc tìm nhà trọ"
+            image="https://images.unsplash.com/photo-1596276020587-8044fe049813?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=939&q=80"
+        />
     </x-slot>
 
     <x-header.search class="fixed z-50 mb-4 w-full shadow" />
@@ -39,10 +42,15 @@
             @endforeach
         </div>
 
-        <div x-data class="mt-6 flex justify-center">
+        <div
+            x-data
+            class="mt-6 flex justify-center"
+        >
             {{-- See more action --}}
-            <button class="rounded-full bg-white px-8 py-4 font-bold text-primary-600 shadow"
-                @click="document.getElementById('header-search-button')?.click()">
+            <button
+                class="rounded-full bg-white px-8 py-4 font-bold text-primary-600 shadow"
+                @click="document.getElementById('header-search-button')?.click()"
+            >
                 Xem thêm
             </button>
         </div>

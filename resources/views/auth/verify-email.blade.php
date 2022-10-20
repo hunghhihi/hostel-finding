@@ -15,7 +15,10 @@
         @endif
 
         <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
+            <form
+                method="POST"
+                action="{{ route('verification.send') }}"
+            >
                 @csrf
 
                 <div>
@@ -26,13 +29,23 @@
             </form>
 
             <div>
-                <a href="{{ route('profile.show') }}" class="text-sm text-gray-600 underline hover:text-gray-900">
+                <a
+                    href="{{ route('profile.show') }}"
+                    class="text-sm text-gray-600 underline hover:text-gray-900"
+                >
                     {{ __('Edit Profile') }}</a>
 
-                <form method="POST" action="{{ route('logout') }}" class="inline">
+                <form
+                    method="POST"
+                    action="{{ route('logout') }}"
+                    class="inline"
+                >
                     @csrf
 
-                    <button type="submit" class="ml-2 text-sm text-gray-600 underline hover:text-gray-900">
+                    <button
+                        type="submit"
+                        class="ml-2 text-sm text-gray-600 underline hover:text-gray-900"
+                    >
                         {{ __('Log Out') }}
                     </button>
                 </form>

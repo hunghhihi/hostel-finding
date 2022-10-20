@@ -1,1 +1,4 @@
-<img src="https://laravel.com/img/logomark.min.svg" alt="logo">
+<img
+    src="https://laravel.com/img/logomark.min.svg"
+    alt="logo"
+>

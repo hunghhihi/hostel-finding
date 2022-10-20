@@ -6,7 +6,8 @@
             "files": ["*.blade.php"],
             "options": {
                 "parser": "blade",
-                "sortTailwindcssClasses": true
+                "sortTailwindcssClasses": true,
+                "singleAttributePerLine": true
             }
         }
     ]

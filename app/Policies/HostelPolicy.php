@@ -50,6 +50,6 @@ class HostelPolicy
 
     public function delete(User $user, Hostel $hostel): Response|bool
     {
-        return $this->deleteAny($user);
+        return $user->id === $hostel->owner_id || $this->deleteAny($user);
     }
 }
