@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'path' => env('FILAMENT_PATH', 'admin'),
+    'path' => env('FILAMENT_PATH', 'filament'),
 
     /*
     |--------------------------------------------------------------------------
@@ -212,7 +212,7 @@ return [
             'alignment' => 'right',
         ],
         'sidebar' => [
-            'is_collapsible_on_desktop' => true,
+            'is_collapsible_on_desktop' => false,
             'groups' => [
                 'are_collapsible' => true,
             ],

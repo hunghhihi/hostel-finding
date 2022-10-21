@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\HostelResource\Pages;
-use App\Filament\Resources\HostelResource\RelationManagers\CommentsRelationManager;
-use App\Filament\Resources\HostelResource\RelationManagers\SubscribersRelationManager;
-use App\Filament\Resources\HostelResource\RelationManagers\VotesRelationManager;
+use App\Filament\Resources\MyHostelResource\Pages;
+use App\Filament\Resources\MyHostelResource\RelationManagers\CommentsRelationManager;
+use App\Filament\Resources\MyHostelResource\RelationManagers\SubscribersRelationManager;
+use App\Filament\Resources\MyHostelResource\RelationManagers\VotesRelationManager;
 use App\Filament\Traits\Localizable;
 use App\Forms\Components\GoogleMapSelector;
 use App\Models\Hostel;
@@ -15,7 +15,6 @@ use Closure;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\MultiSelect;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -31,7 +30,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class HostelResource extends Resource
+class MyHostelResource extends Resource
 {
     use Localizable;
 
@@ -39,29 +38,38 @@ class HostelResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
 
-    public static function getNavigationGroup(): ?string
+    public static function getModelLabel(): string
     {
-        return __('filament.navigation.groups.hostel');
+        return 'nhà trọ của tôi';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'nhà trọ của tôi';
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return static::getModel()::query()->where('owner_id', auth()->id());
+    }
+
+    public static function getSlug(): string
+    {
+        return 'my-hostels';
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('owner_id')
-                    ->relationship('owner', 'email')
-                    ->searchable(['name', 'email', 'phone_number', 'id_number'])
-                    ->disabled()
-                    ->visibleOn(['edit', 'view'])
-                    ->required()
-                    ->localizeLabel(),
                 TextInput::make('title')
                     ->reactive()
                     ->required()
                     ->maxLength(255)
                     ->localizeLabel(),
                 DateTimePicker::make('found_at')
-                    ->required()
+                    ->visibleOn(['edit', 'view'])
+                    ->disabled()
                     ->hint('Đến thời gian này phòng trọ tự động được đánh dấu là đã tìm thấy người thuê')
                     ->localizeLabel(),
                 GoogleMapSelector::make('coordinates')
@@ -198,5 +206,10 @@ class HostelResource extends Resource
             'view' => Pages\ViewHostel::route('/{record}'),
             'edit' => Pages\EditHostel::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return true;
     }
 }

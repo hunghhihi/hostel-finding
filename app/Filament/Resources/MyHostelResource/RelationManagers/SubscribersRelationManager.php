@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Resources\HostelResource\RelationManagers;
+namespace App\Filament\Resources\MyHostelResource\RelationManagers;
 
 use App\Filament\Traits\Localizable;
 use App\Models\User;
@@ -49,6 +49,11 @@ class SubscribersRelationManager extends RelationManager
                 Tables\Actions\DeleteBulkAction::make(),
             ])
         ;
+    }
+
+    public static function canViewForRecord(Model $ownerRecord): bool
+    {
+        return $ownerRecord->owner_id === auth()->id();
     }
 
     protected function canCreate(): bool
