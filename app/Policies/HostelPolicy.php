@@ -25,7 +25,7 @@ class HostelPolicy
 
     public function view(User $user, Hostel $hostel): Response|bool
     {
-        return $this->viewAny($user);
+        return $hostel->owner_id === $user->id || $this->viewAny($user);
     }
 
     public function create(User $user): Response|bool
