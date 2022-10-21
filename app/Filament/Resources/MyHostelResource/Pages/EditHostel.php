@@ -20,8 +20,4 @@ class EditHostel extends EditRecord
         ];
     }
 
-    protected function getRelationManagers(): array
-    {
-        return [];
-    }
 }
