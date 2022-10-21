@@ -14,6 +14,7 @@ class CreateHostel extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['owner_id'] = auth()->id();
+        $data['found_at'] = now()->addMonths(2);
 
         return $data;
     }
