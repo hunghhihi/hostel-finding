@@ -19,5 +19,4 @@ class EditHostel extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
 }
