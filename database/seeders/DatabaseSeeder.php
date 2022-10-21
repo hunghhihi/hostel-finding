@@ -31,6 +31,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'hosteller@example.com',
         ]);
 
+        $supervisor = User::factory()->create([
+            'name' => 'Nguyễn Văn A',
+            'email' => 'supervisor@example.com',
+        ])->assignRole('supervisor');
+
         $users = User::factory(10)->create()->add($hosteller)->add($hosteller)->tap(function ($users): void {
             $users->each->assignRole('hosteller');
         });

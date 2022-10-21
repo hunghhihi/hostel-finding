@@ -79,6 +79,6 @@ class VotesRelationManager extends RelationManager
 
     protected function canCreate(): bool
     {
-        return auth()->user()->can('create', [Vote::class, $this->getOwnerRecord()]);
+        return false;
     }
 }
